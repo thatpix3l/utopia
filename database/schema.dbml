@@ -1,0 +1,18 @@
+Table "utopia"."user" {
+  "id" INTEGER [pk, increment]
+  "username" VARCHAR [not null]
+  "password_hash" VARCHAR [not null]
+}
+
+Table "utopia"."contact" {
+  "id" INTEGER [pk, increment]
+  "user_id" INTEGER
+  "name_first" VARCHAR [not null]
+  "name_last" VARCHAR [not null]
+  "phone" VARCHAR [not null]
+  "email" VARCHAR [not null]
+  "date_created" TIMESTAMP [not null, default: `CURRENT_TIMESTAMP`]
+}
+
+Ref:"utopia"."user"."id" < "utopia"."contact"."user_id" [update: cascade, delete: cascade]
+

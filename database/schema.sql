@@ -1,0 +1,16 @@
+CREATE SCHEMA utopia;
+CREATE TABLE utopia.user(
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR NOT NULL,
+    password_hash VARCHAR NOT NULL
+);
+CREATE TABLE utopia.contact(
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    user_id INTEGER UNIQUE REFERENCES utopia.user(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    name_first VARCHAR NOT NULL,
+    name_last VARCHAR NOT NULL,
+    phone VARCHAR NOT NULL,
+    email VARCHAR NOT NULL,
+    date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id, user_id)
+);
