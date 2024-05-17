@@ -1,16 +1,16 @@
 # Setup
 Make sure you have `Node.js` installed.
 
-```properties
+```shell
 npm install
 ```
 
 # Developing
-```properties
+```shell
 npm run dev
 ```
 
 # Building
-```properties
+```shell
 npm run build
 ```
