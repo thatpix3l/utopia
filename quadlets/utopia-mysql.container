@@ -1,0 +1,19 @@
+[Unit]
+Description=MySql Database For Utopia
+After=local-fs.target
+
+[Container]
+ContainerName=utopia-mysql
+
+Pod=utopia.pod
+
+Image=docker.io/mysql
+AutoUpdate=registry
+
+Volume=%h/utopia/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+Volume=utopia-mysql-data:/var/lib/mysql
+
+Secret=utopia-mysql-password,type=env,target=MYSQL_ROOT_PASSWORD
+
+[Install]
+WantedBy=multi-user.target default.target
