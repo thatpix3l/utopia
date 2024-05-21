@@ -6,11 +6,12 @@ CREATE TABLE utopia.user(
 );
 CREATE TABLE utopia.contact(
     id INTEGER NOT NULL AUTO_INCREMENT,
-    user_id INTEGER UNIQUE REFERENCES utopia.user(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    user_id INTEGER UNIQUE,
     name_first VARCHAR NOT NULL,
     name_last VARCHAR NOT NULL,
     phone VARCHAR NOT NULL,
     email VARCHAR NOT NULL,
     date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id, user_id)
+    PRIMARY KEY (id, user_id),
+    FOREIGN KEY (user_id) REFERENCES utopia.user(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
