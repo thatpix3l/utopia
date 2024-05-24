@@ -1,0 +1,21 @@
+[Unit]
+Description=PHP & Apache Server For Utopia
+After=local-fs.target
+
+[Container]
+ContainerName=utopia-php
+
+Pod=utopia.pod
+
+Image=docker.io/php:apache
+AutoUpdate=registry
+
+Volume=%h/utopia:/utopia:ro
+
+Secret=utopia-mysql-password,type=env,target=MYSQL_ROOT_PASSWORD
+
+WorkingDir=/utopia
+Entrypoint=php ./index.php
+
+[Install]
+WantedBy=multi-user.target default.target
