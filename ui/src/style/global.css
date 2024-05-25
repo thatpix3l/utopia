@@ -1,4 +1,12 @@
+:root {
+    --primary: #182128;
+    --secondary: #253440;
+    --tertiary: #535c5b;
+    --accent: #fd9221;
+}
+
 body {
+
     background-image: url("/public/background.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -6,6 +14,7 @@ body {
     background-size: cover;
 
     color: white;
+    /* color: var(--accent); */
     font-family: Arial, Helvetica, sans-serif;
 
     margin: 0px;
@@ -27,10 +36,12 @@ button {
 
 button {
     color: white;
+    /* color: var(--accent); */
     text-decoration: underline;
 }
 button:hover {
-    color: yellow;
+    /* color: yellow; */
+    color: var(--accent);
 }
 button:active {
     transform: scale(0.98);
@@ -46,20 +57,27 @@ button:active {
     position: sticky;
     top: 0px;
     left: 0px;
-    width: 100%;
+    /* width: 100%; */
+    width: calc(100% - 2px); /* account for border */
     height: fit-content;
 
     z-index: 1;
 
-    background-color: black;
+    /* background-color: black; */
+    background-color: var(--primary);
     text-align: center;
+    border: 1px solid var(--accent);
 }
 
 .navbar button {
-    width: 150px;
+    margin: 4px 2px;
+    width: 140px;
     height: 100%;
 
-    background-color: transparent;
+    /* background-color: transparent; */
+    background-color: var(--secondary);
+    border: 2px groove var(--accent);
+    border-radius: 5px;
     font-size: 30px;
 }
 
@@ -78,11 +96,12 @@ button:active {
     .navbar {
         grid-template-columns: 100px 1fr;
 
-        /* TODO: remove this when done debugging (makes it clear when device width is small enough */
-        background-color: red;
+        /* TODO: remove this when done debugging (makes it clear when device width is small enough) */
+        /* background-color: red; */
     }
 
     .navbar .navigate {
+        margin-right: 10px;
         display: flex;
         flex-wrap: wrap;
         row-gap: 5px;
