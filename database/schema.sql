@@ -5,7 +5,7 @@ CREATE TABLE utopia.user(
     password_hash VARCHAR(100) NOT NULL
 );
 CREATE TABLE utopia.contact(
-    id INTEGER NOT NULL AUTO_INCREMENT,
+    id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
     user_id INTEGER NOT NULL,
     name_first VARCHAR(100) NOT NULL,
     name_last VARCHAR(100) NOT NULL,
