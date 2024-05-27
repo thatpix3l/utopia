@@ -31,65 +31,164 @@
             <button>Sign Up</button>
         </div>
     </div>
-    <p>Hello</p>
     <a href="/">Go to Log In/Sign Up (temp)</a>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
+
+    <title>Contact Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+        main {
+            margin-top: 20px;
+            width: 80%;
+        }
+        .actions {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .actions input, .actions button {
+            padding: 5px;
+            margin-left: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .edit, .delete {
+            cursor: pointer;
+            color: #007BFF;
+        }
+        .edit:hover, .delete:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contact Manager</h1>
+    </header>
+    <main>
+        <div class="actions">
+            <input type="text" id="search" placeholder="Search Contacts">
+            <button onclick="searchContacts()">Search</button>
+            <button onclick="showAddContactForm()">Add Contact</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="contactTableBody">
+                <!-- Contacts will be populated here -->
+            </tbody>
+        </table>
+        <div id="addContactForm" style="display: none;">
+            <h3>Add Contact</h3>
+            <form onsubmit="addContact(event)">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <br>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" required>
+                <br>
+                <button type="submit">Save</button>
+                <button type="button" onclick="hideAddContactForm()">Cancel</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const contacts = [];
+
+        function searchContacts() {
+            const searchQuery = document.getElementById('search').value.toLowerCase();
+            const filteredContacts = contacts.filter(contact => 
+                contact.name.toLowerCase().includes(searchQuery) || 
+                contact.email.toLowerCase().includes(searchQuery) || 
+                contact.phone.includes(searchQuery)
+            );
+            populateContactsTable(filteredContacts);
+        }
+
+        function showAddContactForm() {
+            document.getElementById('addContactForm').style.display = 'block';
+        }
+
+        function hideAddContactForm() {
+            document.getElementById('addContactForm').style.display = 'none';
+        }
+
+        function addContact(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            contacts.push({ name, email, phone });
+            populateContactsTable(contacts);
+            hideAddContactForm();
+        }
+
+        function editContact(index) {
+            const contact = contacts[index];
+            document.getElementById('name').value = contact.name;
+            document.getElementById('email').value = contact.email;
+            document.getElementById('phone').value = contact.phone;
+            showAddContactForm();
+            contacts.splice(index, 1);
+        }
+
+        function deleteContact(index) {
+            contacts.splice(index, 1);
+            populateContactsTable(contacts);
+        }
+
+        function populateContactsTable(contactsToDisplay) {
+            const contactTableBody = document.getElementById('contactTableBody');
+            contactTableBody.innerHTML = '';
+            contactsToDisplay.forEach((contact, index) => {
+                const row = `<tr>
+                    <td>${contact.name}</td>
+                    <td>${contact.email}</td>
+                    <td>${contact.phone}</td>
+                    <td>
+                        <span class="edit" onclick="editContact(${index})">Edit</span> |
+                        <span class="delete" onclick="deleteContact(${index})">Delete</span>
+                    </td>
+                </tr>`;
+                contactTableBody.innerHTML += row;
+            });
+        }
+    </script>
 </body>
 
 </html>
