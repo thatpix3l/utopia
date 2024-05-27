@@ -6,22 +6,21 @@
  * Summer 2034 - 5/22/2024 */
 	$inData = getRequestInfo();
 
-    /* NOTE FOR SELF -> CHANGE THE DB CONNECTION INFO (Create user and password)
-                     -> CHANGE THE NAME OF THE PARAMETERS FROM FRONT-END */
+    /* NOTE FOR SELF -> CHANGE THE NAME OF THE PARAMETERS FROM FRONT-END */
 	
     // Getting the ID of the contact that wil be edited
     $id = $inData['id'];
-	$firstName = $inData['firstName'];
-	$lastName = $inData["lastName"];
-    $phoneNumber = $inData["phoneNumber"];
+	$firstName = $inData['name_first'];
+	$lastName = $inData["name_last"];
+    $phoneNumber = $inData["phone"];
 	$email = $inData["email"];
 
 
 
     // Variable parameters to connect to the DB
     $address = "localhost";
-    $user = "";
-    $password = "";
+    $user = "TheBeast";
+    $password = "G3H0Fs55uhrWQ48Prb";
     $database_name = "utopia";
 
     // Connecting to the Database
