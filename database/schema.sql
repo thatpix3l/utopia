@@ -1,7 +1,7 @@
 CREATE SCHEMA utopia;
 CREATE TABLE utopia.user(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(100) NOT NULL
 );
 CREATE TABLE utopia.contact(
