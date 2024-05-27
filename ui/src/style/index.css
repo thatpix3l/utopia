@@ -13,10 +13,14 @@
     padding: 30px;
 }
 
+/* TODO: additional measures will eventually need to be taken to remove any other stylings that are platform-dependent */
 .form input[type="text"] {
     font-size: 20px;
+
     margin: 10px;
     width: 20ch;
+
+    color: white;
     background-color: var(--secondary);
     border: 1px solid var(--accent);
 }
