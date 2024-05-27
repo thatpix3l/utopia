@@ -1,1 +1,51 @@
+.form {
+    display: grid;
+    min-height: 80vh;
+}
 
+/* TODO: this is slightly lopsided vertically due to the navbar, might want to fix? */
+.form .holder {
+    place-self: center;
+
+    background-color: var(--primary);
+    border: 1px solid var(--accent);
+    width: fit-content;
+    padding: 30px;
+}
+
+/* TODO: additional measures will eventually need to be taken to remove any other stylings that are platform-dependent */
+.form input[type="text"] {
+    font-size: 20px;
+
+    margin: 10px;
+    width: 20ch;
+
+    color: white;
+    background-color: var(--secondary);
+    border: 1px solid var(--accent);
+}
+
+@media (max-width: 800px) {
+    .form input[type="text"] {
+        font-size: 20px;
+        width: 15ch;
+    }
+}
+
+.form button {
+    width: 100px;
+    height: 30px;
+}
+
+.form .edit {
+    text-align: right;
+}
+
+.form .submit {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.inactive {
+    display: none;
+}

@@ -44,9 +44,13 @@ button {
 }
 
 button {
-    color: white;
-    /* color: var(--accent); */
+    margin: 4px 2px;
+
     text-decoration: underline;
+    color: white;
+    background-color: var(--secondary);
+    border: 2px groove var(--accent);
+    border-radius: 5px;
 }
 button:hover {
     /* color: yellow; */
@@ -81,14 +85,10 @@ button:active {
 }
 
 .navbar button {
-    margin: 4px 2px;
     width: 140px;
     height: 100%;
 
     /* background-color: transparent; */
-    background-color: var(--secondary);
-    border: 2px groove var(--accent);
-    border-radius: 5px;
     font-size: 30px;
 }
 
@@ -103,7 +103,7 @@ button:active {
 }
 
 
-@media only screen and (max-width: 800px) {
+@media (max-width: 800px) {
     .navbar {
         grid-template-columns: 100px 1fr;
 

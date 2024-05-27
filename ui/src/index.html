@@ -27,69 +27,64 @@
     <div class="navbar">
         <p class="logo">Utopia</p>
         <div class="navigate">
-            <button>Log In</button>
-            <button>Sign Up</button>
+            <button id="loginTabButton">Log In</button>
+            <button id="signupTabButton">Sign Up</button>
         </div>
     </div>
-    <p>Hello</p>
     <a href="/src/contacts.html">Go to Contacts (temp)</a>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
-    <p>Hello</p>
+
+    <div id="loginForm" class="form">
+        <div class="holder">
+            <div class="edit">
+                <label>
+                    Username
+                    <input type="text" />
+                </label>
+                <br />
+                <label>
+                    Password
+                    <input type="text" />
+                </label>
+            </div>
+            <div>
+                <p><i>All fields are required</i></P>
+            </div>
+            <div class="submit">
+                <button id="loginButton">Log In</button>
+            </div>
+        </div>
+    </div>
+    <div id="signupForm" class="form inactive">
+        <div class="holder">
+            <div class="edit">
+                <label>
+                    Username
+                    <input type="text" />
+                </label>
+                <br />
+                <label>
+                    Password
+                    <input type="text" />
+                </label>
+                <br />
+                <label>
+                    First Name
+                    <input type="text" />
+                </label>
+                <br />
+                <label>
+                    Last Name
+                    <input type="text" />
+                </label>
+            </div>
+            <div>
+                <p><i>All fields are required</i></P>
+            </div>
+            <div class="submit">
+                <button id="signupButton">Sign Up</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
