@@ -6,8 +6,7 @@
  * Summer 2034 - 5/23/2024 */
 	$inData = getRequestInfo();
 
-    /* NOTE FOR SELF -> CHANGE THE DB CONNECTION INFO (Create user and password)
-                     -> CHANGE THE NAME OF THE PARAMETERS FROM FRONT-END*/
+    /* NOTE FOR SELF -> CHANGE THE NAME OF THE PARAMETERS FROM FRONT-END */
 	
     // Variable holding parameters that will be deleted
 	$id = $inData['id'];
@@ -17,8 +16,8 @@
 
     // Variable parameters to connect to the DB
     $address = "localhost";
-    $user = "";
-    $password = "";
+    $user = "TheBeast";
+    $password = "G3H0Fs55uhrWQ48Prb";
     $database_name = "utopia";
 
     // Connecting to the Database
