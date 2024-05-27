@@ -3,6 +3,8 @@ CREATE TABLE utopia.user(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(100) NOT NULL
+    name_first VARHCAR(100) NOT NULL;
+    name_last VARCHAR(100) NOT  NULL;
 );
 CREATE TABLE utopia.contact(
     id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
