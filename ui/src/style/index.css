@@ -41,3 +41,15 @@
     text-align: center;
     margin-top: 20px;
 }
+
+/* .login {
+    display: none;
+}
+
+.signup {
+    display: none;
+} */
+
+.inactive {
+    display: none;
+}
