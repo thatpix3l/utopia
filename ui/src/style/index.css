@@ -1,40 +1,43 @@
 .form {
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; */
-
-    /* display: grid;
-    grid-template-columns: 4fr 1fr 4fr;
-    justify-items: center;
-    justify-content: space-between;
-    align-items: center; */
     display: grid;
-    /* place-items: center; */
     min-height: 80vh;
 }
 
 /* TODO: this is slightly lopsided vertically due to the navbar, might want to fix? */
 .form .holder {
     place-self: center;
-    text-align: right;
 
     background-color: var(--primary);
     border: 1px solid var(--accent);
     width: fit-content;
-    /* min-height: 50vh; */
     padding: 30px;
 }
 
-.form .holder input[type="text"] {
+.form input[type="text"] {
     font-size: 20px;
     margin: 10px;
     width: 20ch;
+    background-color: var(--secondary);
+    border: 1px solid var(--accent);
 }
 
 @media (max-width: 800px) {
-    .form .holder input[type="text"] {
+    .form input[type="text"] {
         font-size: 20px;
         width: 15ch;
     }
+}
+
+.form button {
+    width: 100px;
+    height: 30px;
+}
+
+.form .edit {
+    text-align: right;
+}
+
+.form .submit {
+    text-align: center;
+    margin-top: 20px;
 }
