@@ -10,9 +10,7 @@
 	
     // Variable holding parameters that will be deleted
 	$id = $inData['id'];
-	//$lastName = $inData['lastName'];
-    //$phoneNumber = $inData['phoneNumber'];
-	//$email = $inData['email'];
+  	$user_id = $inData['user_id'];
 
     // Variable parameters to connect to the DB
     $address = "localhost";
@@ -31,12 +29,21 @@
 	else
 	{
         // Statement to delete the parameters
-		$stmt = $conn->prepare("DELETE FROM Contacts where ID=?");
-		$stmt->bind_param("i", $id); // Biding the ?s and expecting the ss to make it harder to have SQL injections
-		$stmt->execute();
+		$stmt = $conn->prepare("DELETE FROM contact where ID=? AND user_id=?");
+		$stmt->bind_param("ii", $id, $user_id); // Biding the ?s and expecting the ss to make it harder to have SQL injections
+
+		// Checking if the execution worked or not
+		if($stmt->execute())
+   		{
+     		returnWithSuccess("Contact (id = ".$id.") Deleted from the database");
+   		}
+   		else
+   		{
+     		returnWithError($stmt->error);
+   		}
+
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
 	}
 
     // Function that request JSON info and converts it into a PHP value
@@ -56,6 +63,13 @@
     function returnWithError( $err )
 	{
 		$retValue = '{"error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
+ 
+	// Return the success message for testing purposes
+   	function returnWithSuccess( $message )
+	{
+		$retValue = '{"Success":"' . $message . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 

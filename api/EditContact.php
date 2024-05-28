@@ -9,13 +9,12 @@
     /* NOTE FOR SELF -> CHANGE THE NAME OF THE PARAMETERS FROM FRONT-END */
 	
     // Getting the ID of the contact that wil be edited
+    $user_id = $inData['user_id'];
     $id = $inData['id'];
 	$firstName = $inData['name_first'];
-	$lastName = $inData["name_last"];
-    $phoneNumber = $inData["phone"];
-	$email = $inData["email"];
-
-
+	$lastName = $inData['name_last'];
+    $phoneNumber = $inData['phone'];
+	$email = $inData['email'];
 
     // Variable parameters to connect to the DB
     $address = "localhost";
@@ -34,13 +33,22 @@
 	else
 	{
         // Statement to edit the parameters
-		$stmt = $conn->prepare("UPDATE contacts SET name_first=?, name_last=?, phone=?, email=? WHERE id=?");
+		$stmt = $conn->prepare("UPDATE contact SET name_first=?, name_last=?, phone=?, email=? WHERE ID=? AND user_id=?");
 		// This makes the connection safer (avoid injection attacks)
-		$stmt->bind_param("ssssi", $firstName, $lastName, $email, $phoneNumber, $id); 
-		$stmt->execute();
+		$stmt->bind_param("ssssii", $firstName, $lastName, $phoneNumber, $email, $id, $user_id); 
+   
+		// Checking if the execution worked or not
+		if($stmt->execute())
+   		{
+     		returnWithSuccess("Contact (id = ".$id.") changed to ".$firstName." ".$lastName." Phone: ".$phoneNumber." Email: ".$email);
+   		}
+   		else
+   		{
+     		returnWithError("Error updating the contact: ".$stmt->error);
+   		}
+   
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
 	}
 
     // Function that request JSON info and converts it into a PHP value
@@ -62,5 +70,12 @@
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
+ 
+ 	// Return a success message for testing purposes
+   	function returnWithSuccess( $message )
+   	{
+     	$retValue = '{"Success":"' . $message . '"}';
+		sendResultInfoAsJson( $retValue );
+   	}
 
 ?>
