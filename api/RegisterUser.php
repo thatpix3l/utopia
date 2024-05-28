@@ -10,7 +10,10 @@
 	
 	//Variables
     $username = $inData["username"];
-    $password_hash = $inData["password_hash"];
+    $password = $inData["password"];
+	$password_hash = password_hash($password, PASSWORD_DEFAULT);
+	$name_first = $inData["name_first"];
+	$name_last = $inData["name_last"];
 
 	//Connects to database
 	$conn = new mysqli("localhost", "TheBeast", "G3H0Fs55uhrWQ48Prb", "utopia");
@@ -20,11 +23,9 @@
 	} 
 	//Code to add user
 	else
-	{
-        //FIX: Create Hashing
-        
-		$stmt = $conn->prepare("INSERT into utopia.user (username,password_hash) VALUES(?,?)");
-		$stmt->bind_param("ss", $username, $password_hash);
+	{   
+		$stmt = $conn->prepare("INSERT into utopia.user (username,password_hash,name_first,name_last) VALUES(?,?,?,?)");
+		$stmt->bind_param("ssss", $username, $password_hash, $name_first, $name_last);
 		if($stmt->execute())
         //For testing if successful notifies
 		{
