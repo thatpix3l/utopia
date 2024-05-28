@@ -10,6 +10,7 @@
 	//variables
 	$id = 0;
 	$username = "";
+	$password = $inData["password"];
 	
 	//Connects to database
 	$conn = new mysqli("localhost", "TheBeast", "G3H0Fs55uhrWQ48Prb", "utopia"); 	
@@ -21,17 +22,24 @@
 	else
 	{
 		//Selects id, username, and password
-		$stmt = $conn->prepare("SELECT id,username FROM user WHERE username=? AND password_hash=?");
-		
-		//FIX: Currently just using password_hash directly
-		$stmt->bind_param("ss", $inData["username"], $inData["password_hash"]);
+		$stmt = $conn->prepare("SELECT id,username,password_hash FROM user WHERE username=?");
+		$stmt->bind_param("s", $inData["username"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
-		//If username and password match returns username and id
+		//If username is found
 		if( $row = $result->fetch_assoc()  )
 		{
-			returnWithInfo($row['username'], $row['id'],);
+			error_log("Fetched Row: " . print_r($row, true));
+
+			//Verifys password and returns info if matches
+			if (password_verify($password, $row['password_hash'])) {
+				returnWithInfo($row['username'], $row['id']);
+				
+			//If doesnt match returns invalid password
+			} else {
+				returnWithError("Invalid Password");
+			}
 		}
 		//If no match returns no records found
 		else
