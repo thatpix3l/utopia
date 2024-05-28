@@ -163,26 +163,34 @@ definitions:
     type: object
     required:
     - username
-    - password_hash
+    - password
     properties:
       username:
         type: string
         example: "fred"
-      password_hash:
+      password:
         type: string
         example: "secret"
   Register:
     type: object
     required:
     - username
-    - password_hash
+    - password
+    - name_first
+    - name_last
     properties:
       username:
         type: string
         example: "fred"
-      password_hash:
+      password:
         type: string
-        example: "secret" 
+        example: "secret"
+      name_first:
+        type: string
+        example: "John"
+      name_last:
+        type: string
+        example: "Doe"
   AddContact:
     type: object
     required:
