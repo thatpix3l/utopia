@@ -28,7 +28,7 @@
 
 @media (max-width: 800px) {
     .form input[type="text"] {
-        font-size: 20px;
+        /* font-size: 20px; */
         width: 15ch;
     }
 }

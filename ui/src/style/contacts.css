@@ -25,7 +25,7 @@ body {
     grid-template-rows: auto 1fr auto;
 }
 
-.holder > *:not(:first-child) {
+.holder>*:not(:first-child) {
     padding-top: 20px;
 }
 
@@ -54,11 +54,11 @@ body {
     grid-template-columns: repeat(4, 1fr);
 }
 
-.row > *:first-child {
+.row>*:first-child {
     border-left: 2px solid var(--accent);
 }
 
-.row > * {
+.row>* {
     margin: 0px;
     margin: fit-content;
     padding: 10px;
@@ -67,4 +67,32 @@ body {
     /* remove overlap of cell borders being thicker */
     border-top: 0px;
     border-left: 0px;
+}
+
+.tableActions {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+}
+
+.tableActions label {
+    display: flex;
+    align-items: center;
+}
+
+.tableActions input[type="text"] {
+    font-size: 20px;
+
+    margin: 10px;
+    width: 20ch;
+
+    color: white;
+    background-color: var(--secondary);
+    border: 1px solid var(--accent);
+}
+
+@media (max-width: 800px) {
+    .tableActions input[type="text"] {
+        font-size: 20px;
+        width: 15ch;
+    }
 }
