@@ -10,17 +10,61 @@ body {
 
 /* TODO: this is slightly lopsided vertically due to the navbar, might want to fix? */
 .wrapper .holder {
-    min-height: 75vh;
-    min-width: 75vw;
-
+    /* min-height: 75vh;
+    min-width: 75vw; */
+    min-height: 50vh;
+    min-width: 50vw;
 
     background-color: var(--primary);
     border: 1px solid var(--accent);
     width: fit-content;
     padding: 30px;
+
+    display: grid;
+    /* grid-template-rows: fit-content auto-fill fit-content; */
+    grid-template-rows: auto 1fr auto;
+}
+
+.holder > *:not(:first-child) {
+    padding-top: 20px;
 }
 
 .holder button {
     width: 100px;
     height: 30px;
+}
+
+.table {
+    text-align: center;
+    /* border: 1px solid var(--accent); */
+}
+
+.table .row:first-child {
+    font-weight: bold;
+
+    /* Causes slight misalignment */
+    /* border: 5px double var(--accent); */
+
+    border-top: 2px solid var(--accent);
+    border-bottom: 4px solid var(--accent);
+}
+
+.table .row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.row > *:first-child {
+    border-left: 2px solid var(--accent);
+}
+
+.row > * {
+    margin: 0px;
+    margin: fit-content;
+    padding: 10px;
+    border: 2px solid var(--accent);
+
+    /* remove overlap of cell borders being thicker */
+    border-top: 0px;
+    border-left: 0px;
 }

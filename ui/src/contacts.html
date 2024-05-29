@@ -26,8 +26,8 @@
     <div class="navbar">
         <p class="logo">Utopia</p>
         <div class="navigate">
-            <button>Log In</button>
-            <button>Sign Up</button>
+            <!-- TODO: might want this to always be on the right side? -->
+            <button>Log Out</button>
         </div>
     </div>
     <div class="wrapper">
@@ -41,19 +41,48 @@
                 <button>Search</button>
                 <button>Add Contact</button>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="contactTableBody">
-                    <!-- Contacts will be populated here -->
-                </tbody>
-            </table>
+            <!-- FIXME: probably need to remove the actual wrapping row divs in order for columns to stay aligned on small device screens -->
+            <div class="table">
+                <div class="row">
+                    <p>Name</p>
+                    <p>Email</p>
+                    <p>Phone</p>
+                    <p>Actions</p>
+                </div>
+                <div class="row">
+                    <p>John Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+            </div>
+            <!-- TODO: programmatically add these (however many fit with buttons on each end to jump all the way to either end) -->
+            <div class="pages">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+            </div>
+            <!-- TODO: format below -->
             <div
                 id="addContactForm"
                 style="display: none;"
