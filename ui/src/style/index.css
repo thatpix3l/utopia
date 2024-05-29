@@ -4,6 +4,7 @@
 }
 
 /* TODO: this is slightly lopsided vertically due to the navbar, might want to fix? */
+/* UPDATE: this won't necessarily fix the popsidedness, but employing the grid tactics I used in contacts.css could help with layout a bit */
 .form .holder {
     place-self: center;
 

@@ -1,0 +1,26 @@
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.wrapper {
+    place-self: center;
+}
+
+/* TODO: this is slightly lopsided vertically due to the navbar, might want to fix? */
+.wrapper .holder {
+    min-height: 75vh;
+    min-width: 75vw;
+
+
+    background-color: var(--primary);
+    border: 1px solid var(--accent);
+    width: fit-content;
+    padding: 30px;
+}
+
+.holder button {
+    width: 100px;
+    height: 30px;
+}
