@@ -9,6 +9,8 @@
 	
 	//variables
 	$id = 0;
+	$name_first = "";
+	$name_last = "";
 	$username = "";
 	$password = $inData["password"];
 	
@@ -21,8 +23,8 @@
 	//Code to login
 	else
 	{
-		//Selects id, username, and password
-		$stmt = $conn->prepare("SELECT id,username,password_hash FROM user WHERE username=?");
+		//Selects id, username, name_first, name_last, and password
+		$stmt = $conn->prepare("SELECT id,username,name_first,name_last,password_hash FROM user WHERE username=?");
 		$stmt->bind_param("s", $inData["username"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
@@ -34,7 +36,7 @@
 
 			//Verifys password and returns info if matches
 			if (password_verify($password, $row['password_hash'])) {
-				returnWithInfo($row['username'], $row['id']);
+				returnWithInfo($row['username'], $row['id'], $row['name_first'], $row['name_last']);
 				
 			//If doesnt match returns invalid password
 			} else {
@@ -72,9 +74,9 @@
 	}
 	
 	//Returns id and username
-	function returnWithInfo( $username, $id )
+	function returnWithInfo( $username, $id, $name_first, $name_last)
 	{
-		$retValue = '{"id":' . $id . ',"username":"' . $username . '","error":""}';
+		$retValue = '{"id":' . $id . ',"username":"' . $username . '","name_first":"' . $name_first . '","name_last":"' . $name_last . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
