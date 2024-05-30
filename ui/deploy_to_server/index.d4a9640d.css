@@ -1,0 +1,55 @@
+.form {
+  min-height: 80vh;
+  display: grid;
+}
+
+.form .holder {
+  background-color: var(--primary);
+  border: 1px solid var(--accent);
+  place-self: center;
+  width: fit-content;
+  padding: 30px;
+}
+
+.form input[type="text"] {
+  color: #fff;
+  background-color: var(--secondary);
+  border: 1px solid var(--accent);
+  width: 20ch;
+  margin: 10px;
+  font-size: 20px;
+}
+
+@media (width <= 800px) {
+  .form input[type="text"] {
+    width: 15ch;
+  }
+}
+
+.form button {
+  width: 100px;
+  height: 30px;
+}
+
+.form .edit {
+  text-align: right;
+}
+
+.form .submit {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.inactive {
+  display: none;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.error:empty {
+  display: none;
+}
+/*# sourceMappingURL=index.d4a9640d.css.map */

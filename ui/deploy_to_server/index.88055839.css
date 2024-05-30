@@ -1,0 +1,86 @@
+:root {
+  --primary: #182128;
+  --secondary: #34495b;
+  --accent: #fd9221;
+}
+
+body {
+  color: #fff;
+  background-image: url("background.6f224429.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  color: #fff;
+  outline: inherit;
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  background-color: var(--secondary);
+  border: none;
+  border: 2px groove var(--accent);
+  border-radius: 5px;
+  margin: 4px 2px;
+  padding: 0;
+  text-decoration: underline;
+}
+
+button:hover {
+  color: var(--accent);
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+.navbar {
+  box-sizing: border-box;
+  z-index: 1;
+  background-color: var(--primary);
+  text-align: center;
+  border: 1px solid var(--accent);
+  grid-template-columns: 100px 1fr 100px;
+  justify-content: space-between;
+  place-items: center;
+  width: 100%;
+  height: fit-content;
+  display: grid;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.navbar button {
+  width: 140px;
+  height: 100%;
+  font-size: 30px;
+}
+
+.logo {
+  vertical-align: middle;
+  justify-self: left;
+  margin: 4px;
+  padding: 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+@media (width <= 800px) {
+  .navbar {
+    grid-template-columns: 100px 1fr;
+  }
+
+  .navbar .navigate {
+    flex-flow: row-reverse wrap;
+    justify-self: right;
+    row-gap: 5px;
+    margin-right: 10px;
+    display: flex;
+  }
+}
+/*# sourceMappingURL=index.88055839.css.map */

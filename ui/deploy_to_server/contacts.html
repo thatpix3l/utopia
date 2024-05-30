@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utopia - Contacts</title>
+    <script type="module" src="/index.5361f531.js"></script><script type="module" src="/contacts.337ec752.js"></script>
+    <link rel="stylesheet" href="/index.88055839.css">
+    <link rel="stylesheet" href="/contacts.811ee9d7.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <p class="logo">Utopia</p>
+        <div class="navigate">
+            <!-- TODO: might want this to always be on the right side? -->
+            <button>Log Out</button>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="holder">
+            <div class="tableActions">
+                <label>
+                    Search Term
+                    <input type="text">
+                </label>
+                <div></div>
+                <div>
+                    <button>Search</button>
+                    <button>Add Contact</button>
+                </div>
+            </div>
+            <!-- FIXME: probably need to remove the actual wrapping row divs in order for columns to stay aligned on small device screens -->
+            <div class="table">
+                <!-- NOTE: name is shown together in the UI but is separated between first and last in the database; combine them in ts when pulling them in to display in the table -->
+                <div class="row">
+                    <p>Name</p>
+                    <p>Email</p>
+                    <p>Phone</p>
+                    <p>Actions</p>
+                </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+            </div>
+            <!-- TODO: programmatically add these (however many fit with buttons on each end to jump all the way to either end) -->
+            <div class="pages">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+            </div>
+            <!-- TODO: format below -->
+            <div id="addContactForm" style="display: none">
+                <h3>Add Contact</h3>
+                <form onsubmit="addContact(event)">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required="">
+                    <br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required="">
+                    <br>
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" required="">
+                    <br>
+                    <button type="submit">Save</button>
+                    <button type="button" onclick="hideAddContactForm()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

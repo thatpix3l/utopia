@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utopia - Account</title>
+    <script type="module" src="/index.5361f531.js"></script><script type="module" src="/index.e61d0915.js"></script>
+    <link rel="stylesheet" href="/index.88055839.css">
+    <link rel="stylesheet" href="/index.d4a9640d.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <p class="logo">Utopia</p>
+        <div class="navigate">
+            <button id="loginTabButton">Log In</button>
+            <button id="signupTabButton">Sign Up</button>
+        </div>
+    </div>
+    <!-- TODO: remove this once done developing (this is here for now just so that parcel will properly recompile contacts.html while in dev mode) -->
+    <a href="/contacts.html" style="display: none">Go to Contacts (temp)</a>
+
+    <div id="loginForm" class="form">
+        <div class="holder">
+            <div class="edit">
+                <label>
+                    Username
+                    <input type="text">
+                </label>
+                <br>
+                <label>
+                    Password
+                    <input type="text">
+                </label>
+            </div>
+            <div>
+                <p><i>All fields are required</i></p>
+                <p id="loginErrorHolder" class="error"></p>
+            </div>
+            <div class="submit">
+                <button id="loginButton">Log In</button>
+            </div>
+        </div>
+    </div>
+    <div id="signupForm" class="form inactive">
+        <div class="holder">
+            <div class="edit">
+                <label>
+                    Username
+                    <input type="text" id="loginUsernameInput">
+                </label>
+                <br>
+                <label>
+                    Password
+                    <input type="text">
+                </label>
+                <br>
+                <label>
+                    First Name
+                    <input type="text" id="signupFirstNameInput">
+                </label>
+                <br>
+                <label>
+                    Last Name
+                    <input type="text" id="signupLastNameInput">
+                </label>
+            </div>
+            <div>
+                <p><i>All fields are required</i></p>
+                <p id="signupErrorHolder" class="error"></p>
+            </div>
+            <div class="submit">
+                <button id="signupButton">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
