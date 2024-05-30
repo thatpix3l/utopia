@@ -50,3 +50,13 @@
 .inactive {
     display: none;
 }
+
+/* TODO: make sure this contrast with the background is good enough and doesn't have a bad combination for the colorblind */
+.error {
+    font-weight: bold;
+    color: red;
+}
+
+.error:empty {
+    display: none;
+}
