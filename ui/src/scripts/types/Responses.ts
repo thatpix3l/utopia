@@ -18,13 +18,11 @@ type AddContactResponse = {
 };
 
 type EditContactResponse = {
-    // FIXME: this casing is inconsistent (API side)
-    Success: string;
+    success: string;
 };
 
 type DeleteContactResponse = {
-    // FIXME: this casing is inconsistent (API side)
-    Success: string;
+    success: string;
 };
 
 type Contact = {
