@@ -2,6 +2,7 @@
 
 type LoginResponse = {
     id: number;
+    // FIXME: why does it respond with the username?
     username: string;
     // FIXME: these are missing (API side)
     // firstName: string;
