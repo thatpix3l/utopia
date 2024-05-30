@@ -1,8 +1,13 @@
+import type { AssertSameKeys } from "./types/Assertions";
+import { Payloads } from "./types/Payloads";
+import { Responses } from "./types/Responses";
+type VerifySameKeys = AssertSameKeys<Payloads, Responses>;
+
 function getRequestURL(type: string) {
     return `http://utopia.cleanmango.com/LAMPAPI/${type}.php`;
 }
 
-export function request(type: string, payload: object, success: (response: object) => void, fail: (error: Error) => void) {
+export function request<T extends keyof Payloads>(type: T, payload: Payloads[T], success: (response: Responses[T]) => void, fail: (error: Error) => void) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", getRequestURL(type), true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");

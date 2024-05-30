@@ -1,6 +1,8 @@
 import $ from "jquery";
+
 import { request } from "./API";
 
+let userID = -1;
 $(() => {
     const loginForm = $<HTMLDivElement>("#loginForm");
     const signupForm = $<HTMLDivElement>("#signupForm");
@@ -25,23 +27,24 @@ $(() => {
     $("#loginButton").on("click", () => {
         request("Login",
             {
-                username: loginUsernameInput.val(),
-                password: loginPasswordInput.val(),
+                username: loginUsernameInput.val() ?? "",
+                password: loginPasswordInput.val() ?? "",
             },
             (response) => {
                 console.log(response);
+                userID = response.id;
             }, (error) => {
                 console.log(error);
             });
     });
 
     $("#signUpButton").on("click", () => {
-        request("RegisterUser",
+        request("Register",
             {
-                username: signupUsernameInput.val(),
-                password: signupPasswordInput.val(),
-                name_first: signupFirstNameInput.val(),
-                name_last: signupLastNameInput.val(),
+                username: signupUsernameInput.val() ?? "",
+                password: signupPasswordInput.val() ?? "",
+                name_first: signupFirstNameInput.val() ?? "",
+                name_last: signupLastNameInput.val() ?? "",
             },
             (response) => {
                 console.log(response);
