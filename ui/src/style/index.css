@@ -60,3 +60,7 @@
 .error:empty {
     display: none;
 }
+
+.selected {
+    border-width: 4px;
+}

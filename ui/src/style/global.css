@@ -49,7 +49,8 @@ button {
     text-decoration: underline;
     color: white;
     background-color: var(--secondary);
-    border: 2px groove var(--accent);
+    /* border: 2px groove var(--accent); */
+    border: 2px solid var(--accent);
     border-radius: 5px;
 }
 button:hover {
@@ -119,6 +120,7 @@ button:active {
         /* flex-direction: wrap-reverse; */
 
         justify-self: right;
+        align-items: center;
     }
 
     .navbar .navigate button {

@@ -7,6 +7,9 @@ import { storeUserToCookie } from "./Cookies";
 $(() => {
     let user: User = { id: 0, firstName: "", lastName: "" };
 
+    const loginTabButton = $<HTMLButtonElement>("#loginTabButton");
+    const signupTabButton = $<HTMLButtonElement>("#signupTabButton");
+
     const loginForm = $<HTMLDivElement>("#loginForm");
     const signupForm = $<HTMLDivElement>("#signupForm");
 
@@ -21,11 +24,17 @@ $(() => {
     const signupErrorHolder = $<HTMLParagraphElement>("#signupErrorHolder");
 
     // handle swapping between logging in and signing up
-    $("#loginTabButton").on("click", () => {
+    loginTabButton.on("click", () => {
+        loginTabButton.addClass("selected");
+        signupTabButton.removeClass("selected");
+
         loginForm.removeClass("inactive");
         signupForm.addClass("inactive");
     });
-    $("#signupTabButton").on("click", () => {
+    signupTabButton.on("click", () => {
+        signupTabButton.addClass("selected");
+        loginTabButton.removeClass("selected");
+
         loginForm.addClass("inactive");
         signupForm.removeClass("inactive");
     });
