@@ -29,7 +29,8 @@ body {
     margin: 0px;
 }
 
-button, a {
+button,
+a {
     transition: color 0.2s ease;
 }
 
@@ -39,16 +40,16 @@ svg {
 
 /* remove default styling */
 button {
-	padding: 0px;
+    padding: 0px;
     margin: 0px;
 
     background: none;
-	color: inherit;
-	outline: inherit;
-	border: none;
-	font: inherit;
+    color: inherit;
+    outline: inherit;
+    border: none;
+    font: inherit;
 
-	cursor: pointer;
+    cursor: pointer;
 }
 
 button {
@@ -61,10 +62,12 @@ button {
     border: 2px solid var(--accent);
     border-radius: 5px;
 }
+
 button:hover {
     /* color: yellow; */
     color: var(--accent);
 }
+
 button:active {
     transform: scale(0.98);
 }
@@ -108,8 +111,14 @@ button:active {
 
     font-size: 30px;
     font-weight: bold;
+
+    color: white;
+    text-decoration: none;
 }
 
+.logo:hover {
+    color: var(--accent);
+}
 
 @media (max-width: 800px) {
     .navbar {
