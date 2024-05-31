@@ -1,9 +1,10 @@
 import $ from "jquery";
 
 import { request } from "./API";
+import { User } from "./types/Entity";
 
 $(() => {
-    let userID = -1;
+    let user: User = { id: 0, firstName: "", lastName: "" };
 
     const loginForm = $<HTMLDivElement>("#loginForm");
     const signupForm = $<HTMLDivElement>("#signupForm");
@@ -36,7 +37,8 @@ $(() => {
             },
             (response) => {
                 console.log(response);
-                userID = response.id;
+                user.id = response.id;
+                // TODO: once response.username gets replace with first and last, set these accordingly on user
                 loginErrorHolder.text("");
             },
             (errorMessage) => {
@@ -61,12 +63,6 @@ $(() => {
             });
     });
 });
-
-type User = {
-    id: number;
-    firstName: string;
-    lastName: string;
-}
 
 function storeUserToCookie(user: User) {
     const offset = 20 * 60 * 1000;

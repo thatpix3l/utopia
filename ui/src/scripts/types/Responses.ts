@@ -1,4 +1,4 @@
-// TODO: should these types have an error key as well?  It sems as if the API just sets an error key to a message if there is an error as opposed to giving some actual error status...
+import { Contact, User } from "./Entity";
 
 type LoginResponse = {
     id: number;
@@ -8,6 +8,8 @@ type LoginResponse = {
     // firstName: string;
     // lastName: string;
 };
+// TODO: once the FIXME's above are corrected, change the type to the following
+// type LoginResponse = User;
 
 type RegisterResponse = {
     success: string;
@@ -24,14 +26,6 @@ type EditContactResponse = {
 type DeleteContactResponse = {
     success: string;
 };
-
-type Contact = {
-    // FIXME: this casing is inconsistent (API side)
-    FirstName: string;
-    LastName: string;
-    phone: string;
-    email: string;
-}
 
 type SearchNameResponse = {
     results: Contact[];
