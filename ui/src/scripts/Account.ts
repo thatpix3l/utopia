@@ -37,9 +37,9 @@ $(() => {
                 console.log(response);
                 userID = response.id;
                 loginErrorHolder.text("");
-            }, (error) => {
-                console.log(error);
-                loginErrorHolder.text(error.message);
+            },
+            (errorMessage) => {
+                loginErrorHolder.text(errorMessage);
             });
     });
 
@@ -54,9 +54,9 @@ $(() => {
             (response) => {
                 console.log(response);
                 signupErrorHolder.text("");
-            }, (error) => {
-                console.log(error);
-                signupErrorHolder.text(error.message);
+            },
+            (errorMessage) => {
+                signupErrorHolder.text(errorMessage);
             });
     });
 });
