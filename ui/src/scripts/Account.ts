@@ -2,6 +2,7 @@ import $ from "jquery";
 
 import { request } from "./API";
 import { User } from "./types/Entity";
+import { storeUserToCookie } from "./Cookies";
 
 $(() => {
     let user: User = { id: 0, firstName: "", lastName: "" };
@@ -40,6 +41,8 @@ $(() => {
                 user.id = response.id;
                 // TODO: once response.username gets replace with first and last, set these accordingly on user
                 loginErrorHolder.text("");
+                storeUserToCookie(user);
+                window.location.href = "/contacts.html";
             },
             (errorMessage) => {
                 loginErrorHolder.text(errorMessage);

@@ -1,8 +1,19 @@
 import $ from "jquery";
+import { getUserFromCookie } from "./Cookies";
 
 
 $(() => {
+    const user = getUserFromCookie();
+    if (!user.id) {
+        window.location.href = "/";
+        return;
+    }
+
+    // ...
 });
+
+
+
 
 // TODO: need to migrate this to ts + jquery
 
