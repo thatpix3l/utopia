@@ -29,6 +29,14 @@ body {
     margin: 0px;
 }
 
+button, a {
+    transition: color 0.2s ease;
+}
+
+svg {
+    transition: border-bottom 0.2s ease;
+}
+
 /* remove default styling */
 button {
 	padding: 0px;

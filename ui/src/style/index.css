@@ -35,8 +35,7 @@
 
 .navbar .logo {
     color: white;
-    text-decoration: none;
-    transition: color 0.3s ease;
+    /* text-decoration: none; */
 }
 
 .navbar .logo:hover {

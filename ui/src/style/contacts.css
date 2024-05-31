@@ -107,3 +107,7 @@ body {
 .tableActions svg {
     border-bottom: 2px solid white;
 }
+
+.tableActions button:hover svg {
+    border-bottom: 2px solid var(--accent);
+}
