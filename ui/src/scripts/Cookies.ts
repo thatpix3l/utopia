@@ -33,3 +33,7 @@ export function getUserFromCookie() {
 
     return user;
 }
+
+export function clearCookie() {
+    document.cookie = "id= ;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+}

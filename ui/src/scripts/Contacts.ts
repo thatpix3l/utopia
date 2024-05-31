@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { getUserFromCookie } from "./Cookies";
+import { clearCookie, getUserFromCookie } from "./Cookies";
 
 
 $(() => {
@@ -9,7 +9,10 @@ $(() => {
         return;
     }
 
-    // ...
+    $("#logoutButton").on("click", () => {
+        clearCookie();
+        window.location.href = "/";
+    });
 });
 
 
