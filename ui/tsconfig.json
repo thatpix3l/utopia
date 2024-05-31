@@ -5,8 +5,12 @@
     "module": "ESNext",
     "allowJs": true,
     "checkJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+
+    // "composite": true,
+    // "skipLibCheck": true,
+    // "moduleResolution": "bundler",
+    "strict": true,
   },
   "include": ["src/**/*.ts", "src/**/*.js"],
-  "references": [{ "path": "./tsconfig.node.json" }]
 }
