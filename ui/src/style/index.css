@@ -47,6 +47,20 @@
     margin-top: 20px;
 }
 
+/* .form button:has(svg) {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.form button svg {
+    border-bottom: 2px solid white;
+}
+
+.form button:hover svg {
+    border-bottom: 2px solid var(--accent);
+} */
+
 .inactive {
     display: none;
 }
@@ -63,4 +77,21 @@
 
 .selected {
     border-width: 4px;
+}
+
+/* TODO: don't use id selectors for this, but still increase selector specificity */
+#passwordHolder {
+    display: inline;
+    position: relative;
+}
+#passwordToggle {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    margin-right: 10px;
+    width: 5ch;
+    height: 20px;
+    border: none;
+    background-color: transparent;
 }
