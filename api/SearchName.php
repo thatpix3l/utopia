@@ -21,10 +21,10 @@
 	else
 	{
 		//Searches using user_id and looks for associated first name, last name, phone, or email 
-		$stmt = $conn->prepare("SELECT * FROM contact WHERE (CONCAT(name_first, ' ', name_last) LIKE ? OR phone LIKE ? OR email LIKE ?) AND user_id=?");
+		$stmt = $conn->prepare("SELECT * FROM contact WHERE (name_first LIKE ? OR name_last LIKE ? OR phone LIKE ? OR email LIKE ?) AND user_id=?");
 		//looks for value
 		$colorName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("sssi", $colorName, $colorName, $colorName, $inData["user_id"]);
+		$stmt->bind_param("ssssi", $colorName, $colorName, $colorName, $colorName, $inData["user_id"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -37,7 +37,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '{"FirstName" : "' . $row["name_first"] . '","LastName" : "' . $row["name_last"] . '","phone" : "' . $row["phone"] . '","email" : "' . $row["email"] . '"}';
+			$searchResults .= '{"firstName" : "' . $row["name_first"] . '","lastName" : "' . $row["name_last"] . '","phone" : "' . $row["phone"] . '","email" : "' . $row["email"] . '"}';
 
 		}
 		
