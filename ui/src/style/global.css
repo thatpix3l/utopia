@@ -88,7 +88,6 @@ button:active {
     width: 140px;
     height: 100%;
 
-    /* background-color: transparent; */
     font-size: 30px;
 }
 
@@ -112,12 +111,18 @@ button:active {
     }
 
     .navbar .navigate {
-        margin-right: 10px;
+        /* margin-right: 10px; */
         display: flex;
         flex-wrap: wrap;
         row-gap: 5px;
-        flex-direction: row-reverse;
+        /* flex-direction: row-reverse; */
+        /* flex-direction: wrap-reverse; */
 
         justify-self: right;
+    }
+
+    .navbar .navigate button {
+        margin-left: auto;
+        margin-right: 5px;
     }
 }
