@@ -79,7 +79,7 @@ body {
     align-items: center;
 }
 
-.tableActions input[type="text"] {
+.tableActions input:is([type="text"], [type="password"]) {
     font-size: 20px;
 
     margin: 10px;
@@ -91,7 +91,7 @@ body {
 }
 
 @media (max-width: 800px) {
-    .tableActions input[type="text"] {
+    .tableActions input:is([type="text"], [type="password"]) {
         font-size: 20px;
         width: 15ch;
     }
