@@ -76,7 +76,7 @@
 	//Returns id and username
 	function returnWithInfo( $username, $id, $name_first, $name_last)
 	{
-		$retValue = '{"id":' . $id . ',"username":"' . $username . '","name_first":"' . $name_first . '","name_last":"' . $name_last . '","error":""}';
+		$retValue = '{"id":' . $id . ',"firstName":"' . $name_first . '","lastName":"' . $name_last . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
