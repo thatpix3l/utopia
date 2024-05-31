@@ -1,19 +1,21 @@
-import $ from "jquery";
 import { clearCookie, getUserFromCookie } from "./Cookies";
 
+const qs = (query: string) => document.querySelector(query);
 
-$(() => {
+const main = () => {
     const user = getUserFromCookie();
     if (!user.id) {
         window.location.href = "/";
         return;
     }
 
-    $("#logoutButton").on("click", () => {
+    (qs("#logoutButton") as HTMLButtonElement).onclick = () => {
         clearCookie();
         window.location.href = "/";
-    });
-});
+    };
+};
+
+main();
 
 
 

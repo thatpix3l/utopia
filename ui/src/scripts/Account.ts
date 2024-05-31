@@ -1,77 +1,93 @@
-import $ from "jquery";
-
 import { request } from "./API";
 import { User } from "./types/Entity";
 import { storeUserToCookie } from "./Cookies";
 
-$(() => {
+const main = () => {
+
+    const qs = (query: string) => document.querySelector(query);
+
     let user: User = { id: 0, firstName: "", lastName: "" };
 
-    const loginTabButton = $<HTMLButtonElement>("#loginTabButton");
-    const signupTabButton = $<HTMLButtonElement>("#signupTabButton");
+    // UI elements used for manipulation.
+    const elems = {
 
-    const loginForm = $<HTMLDivElement>("#loginForm");
-    const signupForm = $<HTMLDivElement>("#signupForm");
+        loginTabButton: qs("#loginTabButton") as HTMLButtonElement,
+        signupTabButton: qs("#signupTabButton") as HTMLButtonElement,
 
-    const loginUsernameInput = $<HTMLInputElement>("#loginUsernameInput");
-    const loginPasswordInput = $<HTMLInputElement>("#loginPasswordInput");
-    const signupUsernameInput = $<HTMLInputElement>("#signupUsernameInput");
-    const signupPasswordInput = $<HTMLInputElement>("#signupPasswordInput");
-    const signupFirstNameInput = $<HTMLInputElement>("#signupFirstNameInput");
-    const signupLastNameInput = $<HTMLInputElement>("#signupLastNameInput");
+        loginForm: qs("#loginForm") as HTMLDivElement,
+        loginUsernameInput: qs("#loginUsernameInput") as HTMLInputElement,
+        loginPasswordInput: qs("#loginPasswordInput") as HTMLInputElement,
 
-    const loginErrorHolder = $<HTMLParagraphElement>("#loginErrorHolder");
-    const signupErrorHolder = $<HTMLParagraphElement>("#signupErrorHolder");
+        signupForm: qs("#signupForm") as HTMLDivElement,
+        signupUsernameInput: qs("#signupUsernameInput") as HTMLInputElement,
+        signupPasswordInput: qs("#signupPasswordInput") as HTMLInputElement,
+        signupFirstNameInput: qs("#signupFirstNameInput") as HTMLInputElement,
+        signupLastNameInput: qs("#signupLastNameInput") as HTMLInputElement,
 
-    // handle swapping between logging in and signing up
-    loginTabButton.on("click", () => {
-        loginTabButton.addClass("selected");
-        signupTabButton.removeClass("selected");
+        loginErrorHolder: qs("#loginErrorHolder") as HTMLParagraphElement,
+        signupErrorHolder: qs("#signupErrorHolder") as HTMLParagraphElement,
 
-        loginForm.removeClass("inactive");
-        signupForm.addClass("inactive");
-    });
-    signupTabButton.on("click", () => {
-        signupTabButton.addClass("selected");
-        loginTabButton.removeClass("selected");
+        loginButton: qs("#loginButton") as HTMLButtonElement,
+        signupButton: qs("#signupButton") as HTMLButtonElement
 
-        loginForm.addClass("inactive");
-        signupForm.removeClass("inactive");
-    });
+    }
 
-    $("#loginButton").on("click", () => {
+    // On login tab click, switch to login tab.
+    elems.loginTabButton.onclick = () => {
+        elems.loginTabButton.classList.add("selected");
+        elems.signupTabButton.classList.remove("selected");
+
+        elems.loginForm.classList.remove("inactive");
+        elems.signupForm.classList.add("inactive");
+    };
+
+    // On signup tab click, switch to signup tab.
+    elems.signupTabButton.onclick = () => {
+        elems.signupTabButton.classList.add("selected");
+        elems.loginTabButton.classList.remove("selected");
+
+        elems.loginForm.classList.add("inactive");
+        elems.signupForm.classList.remove("inactive");
+    };
+
+    // Submit login form data on login button click.
+    elems.loginButton.onclick = () => {
         request("Login",
             {
-                username: loginUsernameInput.val() ?? "",
-                password: loginPasswordInput.val() ?? "",
+                username: elems.loginUsernameInput.value,
+                password: elems.loginPasswordInput.value,
             },
             (response) => {
                 console.log(response);
                 user.id = response.id;
                 // TODO: once response.username gets replace with first and last, set these accordingly on user
-                loginErrorHolder.text("");
+                elems.loginErrorHolder.textContent = "";
                 storeUserToCookie(user);
                 window.location.href = "/contacts.html";
             },
             (errorMessage) => {
-                loginErrorHolder.text(errorMessage);
+                elems.loginErrorHolder.textContent = errorMessage;
             });
-    });
 
-    $("#signUpButton").on("click", () => {
+    }
+
+    elems.signupButton.onclick = () => {
         request("Register",
             {
-                username: signupUsernameInput.val() ?? "",
-                password: signupPasswordInput.val() ?? "",
-                name_first: signupFirstNameInput.val() ?? "",
-                name_last: signupLastNameInput.val() ?? "",
+                username: elems.signupUsernameInput.value,
+                password: elems.signupPasswordInput.value,
+                name_first: elems.signupFirstNameInput.value,
+                name_last: elems.signupLastNameInput.value,
             },
             (response) => {
                 console.log(response);
-                signupErrorHolder.text("");
+                elems.signupErrorHolder.textContent = "";
             },
             (errorMessage) => {
-                signupErrorHolder.text(errorMessage);
+                elems.signupErrorHolder.textContent = errorMessage;
             });
-    });
-});
+    }
+
+};
+
+main();
