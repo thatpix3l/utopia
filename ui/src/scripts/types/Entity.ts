@@ -5,9 +5,10 @@ export type User = {
 };
 
 export type Contact = {
-    // FIXME: this casing is inconsistent (API side)
-    FirstName: string;
-    LastName: string;
+    // FIXME: API doesn't send this yet
+    // id: number;
+    firstName: string;
+    lastName: string;
     phone: string;
     email: string;
 };
