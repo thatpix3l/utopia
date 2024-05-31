@@ -9,7 +9,7 @@
 
     // "composite": true,
     // "skipLibCheck": true,
-    // "moduleResolution": "bundler",
+    "moduleResolution": "bundler",
     "strict": true,
   },
   "include": ["src/**/*.ts", "src/**/*.js"],
