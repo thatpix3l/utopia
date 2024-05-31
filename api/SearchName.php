@@ -37,7 +37,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '{"firstName" : "' . $row["name_first"] . '","lastName" : "' . $row["name_last"] . '","phone" : "' . $row["phone"] . '","email" : "' . $row["email"] . '"}';
+			$searchResults .= '{"id": ' . $row["id"] . ', "firstName": "' . $row["name_first"] . '", "lastName": "' . $row["name_last"] . '", "phone": "' . $row["phone"] . '", "email": "' . $row["email"] . '"}';
 
 		}
 		

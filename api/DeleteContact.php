@@ -32,6 +32,13 @@
 		$stmt = $conn->prepare("DELETE FROM contact where ID=? AND user_id=?");
 		$stmt->bind_param("ii", $id, $user_id); // Biding the ?s and expecting the ss to make it harder to have SQL injections
 
+		// Checking if the required fields were null
+		if($user_id == NULL or $id == NULL)
+		{
+			returnWithError("The fields cannot be null");
+			exit();
+		}
+
 		// Checking if the execution worked or not
 		if($stmt->execute())
    		{

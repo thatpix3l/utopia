@@ -1,25 +1,25 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   description: This is the API documentation for the COP 4331 Small Project team 3
   version: 1.0.0
   title: Utopia Contact Manager
-  # put the contact info for your development or API team
-  contact: {
+  contact:
     name: "Rodrigo Costa, Jacob Mckiernan"
-  }
-
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-
+host: utopia.cleanmango.com
+basePath: /LAMPAPI
+schemes:
+- http
 paths:
   /Login.php:
     post:
       tags:
       - Users
       summary: Logs in to the contact manager
-      operationId: loginUser
       description: Logs in to the contact manager
+      operationId: loginUser
       consumes:
       - application/json
       produces:
@@ -28,22 +28,23 @@ paths:
       - in: body
         name: loginItem
         description: Login
+        required: false
         schema:
           $ref: '#/definitions/Login'
       responses:
-        200:
-          description: OK
-        404:
+        "200":
+          description: Return a string message that shows the user success or reason for error
+        "404":
           description: URL Not Found
-        500:
+        "500":
           description: Server Error
   /RegisterUser.php:
     post:
       tags:
       - Users
       summary: Register a new user to the application
-      operationId: registerUser
       description: Registers a new user to the contact manager
+      operationId: registerUser
       consumes:
       - application/json
       produces:
@@ -52,22 +53,23 @@ paths:
       - in: body
         name: registerItem
         description: Register
+        required: false
         schema:
           $ref: '#/definitions/Register'
       responses:
-        200:
-          description: OK
-        404:
+        "200":
+          description: Return a message based on the request made by the user
+        "404":
           description: URL Not Found
-        500:
+        "500":
           description: Server Error
   /AddContact.php:
     post:
       tags:
       - Contacts
       summary: Adds a contact
-      operationId: addContact
       description: Adds a contact to the utopia app database
+      operationId: addContact
       consumes:
       - application/json
       produces:
@@ -76,22 +78,23 @@ paths:
       - in: body
         name: contactItem
         description: Contact
+        required: false
         schema:
           $ref: '#/definitions/AddContact'
       responses:
-        200:
-          description: OK
-        404:
-          description: URL Not Found 
-        500:
+        "200":
+          description: Return success or error message
+        "404":
+          description: URL Not Found
+        "500":
           description: Server Error
   /SearchName.php:
     get:
       tags:
       - Search
       summary: Searches contacts
-      operationId: searchContact
       description: Searches contacts from the utopia app database
+      operationId: searchContact
       consumes:
       - application/json
       produces:
@@ -100,22 +103,25 @@ paths:
       - in: body
         name: searchItem
         description: Contact Search
+        required: false
         schema:
           $ref: '#/definitions/SearchName'
       responses:
-        200:
-          description: OK
-        404:
+        "200":
+          description: Returns a list of contacts that match the string in the search field
+          schema:
+            $ref: '#/definitions/SearchResponse'
+        "404":
           description: URL Not Found
-        500:
+        "500":
           description: Server Error
   /EditContact.php:
     put:
       tags:
       - Edit
       summary: Edit contacts
-      operationId: editContact
       description: Edit and update information for contacts already in the database
+      operationId: editContact
       consumes:
       - application/json
       produces:
@@ -124,22 +130,23 @@ paths:
       - in: body
         name: editItem
         description: Edit Contact
+        required: false
         schema:
           $ref: '#/definitions/EditContact'
       responses:
-        200:
-          description: OK
-        404:
+        "200":
+          description: Return success or error message
+        "404":
           description: URL Not Found
-        500:
+        "500":
           description: Server Error
   /DeleteContact.php:
     delete:
       tags:
       - Delete
       summary: Delete contacts
-      operationId: deleteContact
       description: Delete contact from the utopia app database
+      operationId: deleteContact
       consumes:
       - application/json
       produces:
@@ -148,94 +155,101 @@ paths:
       - in: body
         name: deleteItem
         description: Delete Contact
+        required: false
         schema:
           $ref: '#/definitions/DeleteContact'
       responses:
-        200:
-          description: OK
-        404:
+        "200":
+          description: Return success or error message
+        "404":
           description: URL Not Found
-        500:
+        "500":
           description: Server Error
-          
 definitions:
   Login:
     type: object
     required:
-    - username
     - password
+    - username
     properties:
       username:
         type: string
-        example: "fred"
+        example: fred
       password:
         type: string
-        example: "secret"
+        example: secret
   Register:
     type: object
     required:
-    - username
-    - password
     - name_first
     - name_last
+    - password
+    - username
     properties:
       username:
         type: string
-        example: "fred"
+        example: fred
       password:
         type: string
-        example: "secret"
+        example: secret
       name_first:
         type: string
-        example: "John"
+        example: John
       name_last:
         type: string
-        example: "Doe"
+        example: Doe
   AddContact:
     type: object
     required:
-    - user_id
+    - email
     - name_first
     - name_last
     - phone
-    - email
+    - user_id
     properties:
       user_id:
         type: integer
         example: 1
       name_first:
         type: string
-        example: "John"
+        example: John
       name_last:
         type: string
-        example: "Doe"
+        example: Doe
       phone:
         type: string
         example: "1234567890"
       email:
         type: string
-        example: "email@email.com"
+        example: email@email.com
   SearchName:
     type: object
     required:
-    - user_id
     - search
+    - user_id
     properties:
       user_id:
         type: integer
         example: 1
       search:
         type: string
-        example: "jo"
+        example: jo
+  SearchResponse:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/SearchResponse_results'
   EditContact:
     type: object
     required:
+    - email
     - id
-    - user_id
     - name_first
     - name_last
     - phone
-    - email
+    - user_id
     properties:
       id:
         type: integer
@@ -245,16 +259,16 @@ definitions:
         example: 1
       name_first:
         type: string
-        example: "John"
+        example: John
       name_last:
         type: string
-        example: "Doe"
+        example: Doe
       phone:
         type: string
         example: "1234567890"
       email:
         type: string
-        example: "email@email.com"
+        example: email@email.com
   DeleteContact:
     type: object
     required:
@@ -267,8 +281,18 @@ definitions:
       user_id:
         type: integer
         example: 1
-
-host: utopia.cleanmango.com
-basePath: /LAMPAPI
-schemes:
-- http
+  SearchResponse_results:
+    type: object
+    properties:
+      FirstName:
+        type: string
+        example: John
+      LastName:
+        type: string
+        example: Doe
+      phone:
+        type: string
+        example: "1234567890"
+      email:
+        type: string
+        example: email@email.com

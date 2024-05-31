@@ -36,6 +36,14 @@
 		$stmt = $conn->prepare("UPDATE contact SET name_first=?, name_last=?, phone=?, email=? WHERE ID=? AND user_id=?");
 		// This makes the connection safer (avoid injection attacks)
 		$stmt->bind_param("ssssii", $firstName, $lastName, $phoneNumber, $email, $id, $user_id); 
+
+		// In case any of the input fields are equal to null or empty
+		if($id == NULL or $firstName == "" or $lastName == "" or $phoneNumber == "" or $email == "")
+		{
+			returnWithError("The fields cannot be null");
+			exit();
+		}
+   
    
 		// Checking if the execution worked or not
 		if($stmt->execute())
