@@ -33,6 +33,16 @@
     }
 }
 
+.navbar .logo {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navbar .logo:hover {
+    color: var(--accent);
+}
+
 .form button {
     width: 100px;
     height: 30px;
