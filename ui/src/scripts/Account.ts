@@ -71,6 +71,11 @@ $(() => {
             (response) => {
                 console.log(response);
 
+                signupUsernameInput.val("");
+                signupPasswordInput.val("");
+                signupFirstNameInput.val("");
+                signupLastNameInput.val("");
+
                 signupErrorHolder.text("");
             },
             (errorMessage) => {
