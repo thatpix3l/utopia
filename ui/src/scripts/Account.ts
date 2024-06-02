@@ -65,7 +65,7 @@ $(() => {
             });
     });
 
-    $("#signUpButton").on("click", () => {
+    $("#signupButton").on("click", () => {
         request("RegisterUser",
             {
                 username: signupUsernameInput.val() ?? "",
