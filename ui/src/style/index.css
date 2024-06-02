@@ -69,10 +69,13 @@
 .error {
     font-weight: bold;
     color: red;
+    scale: 100%;
+    transition: scale 0.2s;
 }
 
 .error:empty {
-    display: none;
+    /* display: none; */
+    scale: 0%;
 }
 
 .selected {

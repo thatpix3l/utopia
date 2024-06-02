@@ -67,13 +67,21 @@ button {
     border-radius: 5px;
 }
 
-button:hover {
+button:hover:not(:disabled) {
     /* color: yellow; */
     color: var(--accent);
 }
 
 button:active {
     transform: scale(0.98);
+}
+
+button:disabled {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: red;
+    /* color: red;
+    background-color: black; */
 }
 
 .navbar {
