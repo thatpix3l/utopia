@@ -40,7 +40,7 @@ $(() => {
         signupForm.removeClass("inactive");
     });
 
-    $("#loginButton").on("click", () => {
+    const login = () => {
         request("Login",
             {
                 username: loginUsernameInput.val() ?? "",
@@ -63,9 +63,16 @@ $(() => {
                 // FIXME: hopefully the API can change the response to be something like this at some point
                 loginErrorHolder.text("Invalid Username");
             });
-    });
+    };
 
-    $("#signupButton").on("click", () => {
+    loginForm.find("input:is([type='text'], [type='password'])").on("keyup", (event) => {
+        if (event.key === "Enter") {
+            login();
+        }
+    });
+    $("#loginButton").on("click", login);
+
+    const signup = () => {
         request("RegisterUser",
             {
                 username: signupUsernameInput.val() ?? "",
@@ -88,5 +95,12 @@ $(() => {
 
                 signupErrorHolder.text(errorMessage);
             });
+    };
+
+    signupForm.find("input:is([type='text'], [type='password'])").on("keyup", (event) => {
+        if (event.key === "Enter") {
+            signup();
+        }
     });
+    $("#signupButton").on("click", signup);
 });
