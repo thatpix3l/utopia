@@ -41,6 +41,7 @@ $(() => {
     });
 
     const login = () => {
+        // console.log(loginUsernameInput.val(), loginPasswordInput.val());
         request("Login",
             {
                 username: loginUsernameInput.val() ?? "",
@@ -73,10 +74,11 @@ $(() => {
     $("#loginButton").on("click", login);
 
     const signup = () => {
+        // console.log(signupUsernameInput.val(), signupPasswordInput.val(), signupFirstNameInput.val(), signupLastNameInput.val());
         request("RegisterUser",
             {
                 username: signupUsernameInput.val() ?? "",
-                password: md5(signupPasswordInput.val()) ?? "",
+                password: md5(signupPasswordInput.val() ?? ""),
                 name_first: signupFirstNameInput.val() ?? "",
                 name_last: signupLastNameInput.val() ?? "",
             },
