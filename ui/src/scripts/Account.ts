@@ -56,7 +56,12 @@ $(() => {
                 window.location.href = "/contacts.html";
             },
             (errorMessage) => {
-                loginErrorHolder.text(errorMessage);
+                console.log(errorMessage);
+                // This error message doesn't make much sense for the user for the user
+                // loginErrorHolder.text(errorMessage);
+
+                // FIXME: hopefully the API can change the response to be something like this at some point
+                loginErrorHolder.text("Invalid Username");
             });
     });
 
@@ -79,6 +84,8 @@ $(() => {
                 signupErrorHolder.text("");
             },
             (errorMessage) => {
+                console.log(errorMessage);
+
                 signupErrorHolder.text(errorMessage);
             });
     });
