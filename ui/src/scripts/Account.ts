@@ -3,6 +3,7 @@ import $ from "jquery";
 import { request } from "./API";
 import { User } from "./types/Entity";
 import { storeUserToCookie } from "./Cookies";
+import { validatePartialName, validatePassword, validateUsername } from "./Validation";
 const md5 = require("md5");
 
 $(() => {
@@ -14,6 +15,9 @@ $(() => {
     const loginForm = $<HTMLDivElement>("#loginForm");
     const signupForm = $<HTMLDivElement>("#signupForm");
 
+    const loginInputs = loginForm.find("input:is([type='text'], [type='password'])");
+    const signupInputs = signupForm.find("input:is([type='text'], [type='password'])");
+
     const loginUsernameInput = $<HTMLInputElement>("#loginUsernameInput");
     const loginPasswordInput = $<HTMLInputElement>("#loginPasswordInput");
     const signupUsernameInput = $<HTMLInputElement>("#signupUsernameInput");
@@ -23,6 +27,13 @@ $(() => {
 
     const loginErrorHolder = $<HTMLParagraphElement>("#loginErrorHolder");
     const signupErrorHolder = $<HTMLParagraphElement>("#signupErrorHolder");
+
+    const loginButton = $<HTMLButtonElement>("#loginButton");
+    const signupButton = $<HTMLButtonElement>("#signupButton");
+
+    // start disabled
+    loginButton.prop("disabled", true);
+    signupButton.prop("disabled", true);
 
     // handle swapping between logging in and signing up
     loginTabButton.on("click", () => {
@@ -39,6 +50,19 @@ $(() => {
         loginForm.addClass("inactive");
         signupForm.removeClass("inactive");
     });
+
+    // returns whether there are errors
+    const validateLogin = () => {
+        const errors = validateUsername(loginUsernameInput.val() ?? "").concat(
+            validatePassword(loginPasswordInput.val() ?? "")
+        );
+        console.log(errors);
+
+        loginErrorHolder.html(errors.join("<br />"));
+        loginButton.prop("disabled", !!errors.length);
+
+        return !!errors.length;
+    };
 
     const login = () => {
         // console.log(loginUsernameInput.val(), loginPasswordInput.val());
@@ -66,12 +90,38 @@ $(() => {
             });
     };
 
-    loginForm.find("input:is([type='text'], [type='password'])").on("keyup", (event) => {
+    loginInputs.on("focus", (event) => {
+        validateLogin();
+    });
+    loginInputs.on("keyup", (event) => {
+        if (validateLogin()) {
+            return;
+        }
+
         if (event.key === "Enter") {
             login();
         }
     });
-    $("#loginButton").on("click", login);
+    loginInputs.on("blur", (event) => {
+        loginErrorHolder.text("");
+    });
+
+    loginButton.on("click", login);
+
+    // returns whether there are errors
+    const validateSignup = () => {
+        const errors = validateUsername(signupUsernameInput.val() ?? "").concat(
+            validatePassword(signupPasswordInput.val() ?? ""),
+            validatePartialName(signupFirstNameInput.val() ?? "", "First"),
+            validatePartialName(signupLastNameInput.val() ?? "", "Last")
+        );
+        console.log(errors);
+
+        signupErrorHolder.html(errors.join("<br />"));
+        signupButton.prop("disabled", !!errors.length);
+
+        return !!errors.length;
+    };
 
     const signup = () => {
         // console.log(signupUsernameInput.val(), signupPasswordInput.val(), signupFirstNameInput.val(), signupLastNameInput.val());
@@ -91,6 +141,8 @@ $(() => {
                 signupLastNameInput.val("");
 
                 signupErrorHolder.text("");
+
+                // TODO: make this notify user of successful signup
             },
             (errorMessage) => {
                 console.log(errorMessage);
@@ -99,10 +151,21 @@ $(() => {
             });
     };
 
-    signupForm.find("input:is([type='text'], [type='password'])").on("keyup", (event) => {
+    signupInputs.on("focus", (event) => {
+        validateSignup();
+    });
+    signupInputs.on("keyup", (event) => {
+        if (validateSignup()) {
+            return;
+        }
+
         if (event.key === "Enter") {
             signup();
         }
     });
-    $("#signupButton").on("click", signup);
+    signupInputs.on("blur", (event) => {
+        signupErrorHolder.text("");
+    });
+
+    signupButton.on("click", signup);
 });

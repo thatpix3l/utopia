@@ -5,6 +5,7 @@ import { clearCookie, getUserFromCookie } from "./Cookies";
 $(() => {
     const user = getUserFromCookie();
     if (!user.id) {
+        // comment these two lines while testing
         window.location.href = "/";
         return;
     }
