@@ -47,6 +47,8 @@ $(() => {
                 password: md5(loginPasswordInput.val() ?? ""),
             },
             (response) => {
+                console.log(response);
+
                 user = response;
                 loginErrorHolder.text("");
                 storeUserToCookie(user);
@@ -67,6 +69,8 @@ $(() => {
                 name_last: signupLastNameInput.val() ?? "",
             },
             (response) => {
+                console.log(response);
+
                 signupErrorHolder.text("");
             },
             (errorMessage) => {
