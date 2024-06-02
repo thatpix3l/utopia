@@ -68,7 +68,8 @@
 /* TODO: make sure this contrast with the background is good enough and doesn't have a bad combination for the colorblind */
 .error {
     font-weight: bold;
-    color: red;
+    /* color: red; */
+    color: #ff3434;
     scale: 100%;
     transition: scale 0.2s;
 }

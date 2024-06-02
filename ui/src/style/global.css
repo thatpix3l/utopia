@@ -79,7 +79,8 @@ button:active {
 button:disabled {
     text-decoration: line-through;
     text-decoration-thickness: 2px;
-    text-decoration-color: red;
+    /* text-decoration-color: red; */
+    text-decoration-color: #ff3434;
     /* color: red;
     background-color: black; */
 }
