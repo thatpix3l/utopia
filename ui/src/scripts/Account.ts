@@ -59,7 +59,7 @@ $(() => {
     });
 
     $("#signUpButton").on("click", () => {
-        request("Register",
+        request("RegisterUser",
             {
                 username: signupUsernameInput.val() ?? "",
                 password: md5(signupPasswordInput.val()) ?? "",

@@ -5,7 +5,7 @@ type LoginResponse = User;
 type GenericResponse = {
     success: string;
 };
-type RegisterResponse = GenericResponse;
+type RegisterUserResponse = GenericResponse;
 type AddContactResponse = GenericResponse;
 type EditContactResponse = Contact & GenericResponse;
 type DeleteContactResponse = GenericResponse;
@@ -16,7 +16,7 @@ type SearchNameResponse = {
 
 export type Responses = {
     Login: LoginResponse;
-    Register: RegisterResponse;
+    RegisterUser: RegisterUserResponse;
     AddContact: AddContactResponse;
     EditContact: EditContactResponse;
     DeleteContact: DeleteContactResponse;

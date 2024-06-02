@@ -3,7 +3,7 @@ type LoginPayload = {
     password: string;
 };
 
-type RegisterPayload = {
+type RegisterUserPayload = {
     username: string;
     password: string;
     name_first: string;
@@ -34,7 +34,7 @@ type SearchNamePayload = {
 
 export type Payloads = {
     Login: LoginPayload;
-    Register: RegisterPayload;
+    RegisterUser: RegisterUserPayload;
     AddContact: AddContactPayload;
     EditContact: EditContactPayload;
     DeleteContact: DeleteContactPayload;
