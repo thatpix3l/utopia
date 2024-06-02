@@ -3,6 +3,7 @@ import $ from "jquery";
 import { request } from "./API";
 import { User } from "./types/Entity";
 import { storeUserToCookie } from "./Cookies";
+const md5 = require("md5");
 
 $(() => {
     let user: User = { id: 0, firstName: "", lastName: "" };
@@ -43,14 +44,13 @@ $(() => {
         request("Login",
             {
                 username: loginUsernameInput.val() ?? "",
-                password: loginPasswordInput.val() ?? "",
+                password: md5(loginPasswordInput.val() ?? ""),
             },
             (response) => {
-                console.log(response);
-                user.id = response.id;
-                // TODO: once response.username gets replace with first and last, set these accordingly on user
+                user = response;
                 loginErrorHolder.text("");
                 storeUserToCookie(user);
+
                 window.location.href = "/contacts.html";
             },
             (errorMessage) => {
