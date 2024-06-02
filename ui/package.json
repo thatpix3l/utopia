@@ -2,7 +2,7 @@
   "name": "utopia-ui",
   "source": "src/index.html",
   "scripts": {
-    "dev": "parcel",
+    "dev": "parcel --no-cache",
     "build": "parcel build"
   },
   "devDependencies": {
