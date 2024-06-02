@@ -31,7 +31,9 @@ export function validatePassword(password: string) {
 // for either first or last name, not combined
 export function validatePartialName(name: string, part: "First" | "Last") {
     const issues: string[] = [];
-    if (name.match(/\W/)) {
+    if (!name.length) {
+        issues.push(`${part} name can't be empty`);
+    } else if (name.match(/[^A-Za-z]/)) {
         issues.push(`${part} name can only contain letters`);
     }
 
