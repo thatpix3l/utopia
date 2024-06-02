@@ -2,21 +2,13 @@ import { Contact, User } from "./Entity";
 
 type LoginResponse = User;
 
-type RegisterResponse = {
+type GenericResponse = {
     success: string;
 };
-
-type AddContactResponse = {
-    success: string;
-};
-
-type EditContactResponse = {
-    success: string;
-};
-
-type DeleteContactResponse = {
-    success: string;
-};
+type RegisterResponse = GenericResponse;
+type AddContactResponse = GenericResponse;
+type EditContactResponse = Contact & GenericResponse;
+type DeleteContactResponse = GenericResponse;
 
 type SearchNameResponse = {
     results: Contact[];

@@ -10,7 +10,7 @@ type RegisterPayload = {
     name_last: string;
 };
 
-type AddContactPayload = {
+type GenericContactPayload = {
     user_id: number;
     name_first: string;
     name_last: string;
@@ -18,14 +18,9 @@ type AddContactPayload = {
     email: string;
 };
 
-type EditContactPayload = {
-    id: number;
-    user_id: number;
-    name_first: string;
-    name_last: string;
-    phone: string;
-    email: string;
-};
+type AddContactPayload = GenericContactPayload;
+
+type EditContactPayload = GenericContactPayload & { id: number };
 
 type DeleteContactPayload = {
     id: number;

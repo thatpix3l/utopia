@@ -5,8 +5,7 @@ export type User = {
 };
 
 export type Contact = {
-    // FIXME: API doesn't send this yet
-    // id: number;
+    id: number;
     firstName: string;
     lastName: string;
     phone: string;
