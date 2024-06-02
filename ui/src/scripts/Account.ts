@@ -62,12 +62,11 @@ $(() => {
         request("Register",
             {
                 username: signupUsernameInput.val() ?? "",
-                password: signupPasswordInput.val() ?? "",
+                password: md5(signupPasswordInput.val()) ?? "",
                 name_first: signupFirstNameInput.val() ?? "",
                 name_last: signupLastNameInput.val() ?? "",
             },
             (response) => {
-                console.log(response);
                 signupErrorHolder.text("");
             },
             (errorMessage) => {
