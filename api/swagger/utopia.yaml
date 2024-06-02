@@ -1,3 +1,4 @@
+---
 swagger: "2.0"
 info:
   description: This is the API documentation for the COP 4331 Small Project team 3
@@ -33,7 +34,9 @@ paths:
           $ref: '#/definitions/Login'
       responses:
         "200":
-          description: Return a string message that shows the user success or reason for error
+          description: OK
+          schema:
+            $ref: '#/definitions/inline_response_200'
         "404":
           description: URL Not Found
         "500":
@@ -58,7 +61,9 @@ paths:
           $ref: '#/definitions/Register'
       responses:
         "200":
-          description: Return a message based on the request made by the user
+          description: OK
+          schema:
+            $ref: '#/definitions/inline_response_200_1'
         "404":
           description: URL Not Found
         "500":
@@ -83,15 +88,17 @@ paths:
           $ref: '#/definitions/AddContact'
       responses:
         "200":
-          description: Return success or error message
+          description: OK
+          schema:
+            $ref: '#/definitions/inline_response_200_2'
         "404":
           description: URL Not Found
         "500":
           description: Server Error
   /SearchName.php:
-    get:
+    post:
       tags:
-      - Search
+      - Contacts
       summary: Searches contacts
       description: Searches contacts from the utopia app database
       operationId: searchContact
@@ -108,17 +115,17 @@ paths:
           $ref: '#/definitions/SearchName'
       responses:
         "200":
-          description: Returns a list of contacts that match the string in the search field
+          description: OK
           schema:
-            $ref: '#/definitions/SearchResponse'
+            $ref: '#/definitions/inline_response_200_3'
         "404":
           description: URL Not Found
         "500":
           description: Server Error
   /EditContact.php:
-    put:
+    post:
       tags:
-      - Edit
+      - Contacts
       summary: Edit contacts
       description: Edit and update information for contacts already in the database
       operationId: editContact
@@ -135,15 +142,17 @@ paths:
           $ref: '#/definitions/EditContact'
       responses:
         "200":
-          description: Return success or error message
+          description: OK
+          schema:
+            $ref: '#/definitions/inline_response_200_4'
         "404":
           description: URL Not Found
         "500":
           description: Server Error
   /DeleteContact.php:
-    delete:
+    post:
       tags:
-      - Delete
+      - Contacts
       summary: Delete contacts
       description: Delete contact from the utopia app database
       operationId: deleteContact
@@ -160,7 +169,9 @@ paths:
           $ref: '#/definitions/DeleteContact'
       responses:
         "200":
-          description: Return success or error message
+          description: OK
+          schema:
+            $ref: '#/definitions/inline_response_200_5'
         "404":
           description: URL Not Found
         "500":
@@ -234,13 +245,6 @@ definitions:
       search:
         type: string
         example: jo
-  SearchResponse:
-    type: object
-    properties:
-      results:
-        type: array
-        items:
-          $ref: '#/definitions/SearchResponse_results'
   EditContact:
     type: object
     required:
@@ -281,13 +285,49 @@ definitions:
       user_id:
         type: integer
         example: 1
-  SearchResponse_results:
+  inline_response_200:
     type: object
     properties:
-      FirstName:
+      id:
+        type: integer
+        example: 1
+      firstName:
         type: string
         example: John
-      LastName:
+      lastName:
+        type: string
+        example: Doe
+      error:
+        type: string
+        example: ""
+  inline_response_200_1:
+    type: object
+    properties:
+      success:
+        type: string
+        example: User added succefully
+      error:
+        type: string
+        example: ""
+  inline_response_200_2:
+    type: object
+    properties:
+      success:
+        type: string
+        example: Contact added successfully
+      error:
+        type: string
+        example: ""
+  inline_response_200_3_results:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      firstName:
+        type: string
+        example: John
+      lastName:
         type: string
         example: Doe
       phone:
@@ -296,3 +336,46 @@ definitions:
       email:
         type: string
         example: email@email.com
+  inline_response_200_3:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/inline_response_200_3_results'
+      error:
+        type: string
+        example: ""
+  inline_response_200_4:
+    type: object
+    properties:
+      success:
+        type: string
+        example: Contact updated successfully
+      id:
+        type: integer
+        example: 1
+      firstName:
+        type: string
+        example: John
+      lastName:
+        type: string
+        example: Doe
+      phone:
+        type: string
+        example: "1234567890"
+      email:
+        type: string
+        example: email@email.com
+      error:
+        type: string
+        example: ""
+  inline_response_200_5:
+    type: object
+    properties:
+      success:
+        type: string
+        example: Contact (id = 1) Deleted from the database
+      error:
+        type: string
+        example: ""

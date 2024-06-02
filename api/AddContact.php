@@ -19,23 +19,34 @@
 	$conn = new mysqli("localhost", "TheBeast", "G3H0Fs55uhrWQ48Prb", "utopia");
 	if ($conn->connect_error) 
 	{
-		returnWithError( $conn->connect_error );
+		// Return connection error
+		returnWithInfo( "",$conn->connect_error );
 	} 
 	//Code to add contact
 	else
 	{
 		$stmt = $conn->prepare("INSERT into utopia.contact (user_id,name_first,name_last,phone,email) VALUES(?,?,?,?,?)");
 		$stmt->bind_param("issss", $user_id, $name_first, $name_last, $phone, $email);
-		if($stmt->execute())
-        //For testing if successful notifies
+		if($user_id == NULL or $name_first == "" or $name_last == "" or $phone == "" or $email == "")
 		{
-            returnWithSuccess("Contact added successfully");
-        }
-		//If not successful explains why
-        else
-        {
-            returnWithError("Error adding contact: " . $stmt->error);
-        }
+			// Return error if fields are empty or null
+			returnWithInfo("", "The fields cannot be empty");
+		}
+		else
+		{
+			if($stmt->execute())
+			//For testing if successful notifies
+			{
+				// Return success message
+				returnWithInfo("Contact added successfully", "");
+			}
+			//If not successful explains why
+			else
+			{
+				// Return error in executing the insertion
+				returnWithInfo("","Error adding contact: " . $stmt->error);
+			}
+		}
 		$stmt->close();
 		$conn->close();
 	}
@@ -51,17 +62,11 @@
 		header('Content-type: application/json');
 		echo $obj;
 	}
-	//returns error
-	function returnWithError( $err )
+	// Return response
+	function returnWithInfo( $success, $err )
 	{
-		$retValue = '{"error":"' . $err . '"}';
+		$retValue = '{"success": "' . $success .'","error": "'.$err.'"}';
 		sendResultInfoAsJson( $retValue );
 	}
-	//returns success
-	function returnWithSuccess($message)
-    {
-        $retValue = '{"success":"' . $message . '"}';
-        sendResultInfoAsJson($retValue);
-    }
 	
 ?>

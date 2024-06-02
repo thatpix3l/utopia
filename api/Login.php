@@ -18,7 +18,8 @@
 	$conn = new mysqli("localhost", "TheBeast", "G3H0Fs55uhrWQ48Prb", "utopia"); 	
 	if( $conn->connect_error )
 	{
-		returnWithError( $conn->connect_error );
+		// Return connection error
+		returnWithInfo( "", 0, "", "", $conn->connect_error );
 	}
 	//Code to login
 	else
@@ -36,17 +37,18 @@
 
 			//Verifys password and returns info if matches
 			if (password_verify($password, $row['password_hash'])) {
-				returnWithInfo($row['username'], $row['id'], $row['name_first'], $row['name_last']);
+				returnWithInfo($row['username'], $row['id'], $row['name_first'], $row['name_last'], "");
 				
 			//If doesnt match returns invalid password
 			} else {
-				returnWithError("Invalid Password");
+				returnWithInfo("", 0, "", "", "Invalid Password");
 			}
 		}
 		//If no match returns no records found
 		else
 		{
-			returnWithError("No Records Found");
+			// Return fetch error, if the user does not have an account
+			returnWithInfo("", 0, "", "", "No Records Found");
 		}
 
 		$stmt->close();
@@ -66,17 +68,10 @@
 		echo $obj;
 	}
 	
-	//Returns Error
-	function returnWithError( $err )
+	//Returns response
+	function returnWithInfo( $username, $id, $name_first, $name_last, $err)
 	{
-		$retValue = '{"id":0,"username":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
-	//Returns id and username
-	function returnWithInfo( $username, $id, $name_first, $name_last)
-	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $name_first . '","lastName":"' . $name_last . '","error":""}';
+		$retValue = '{"id":' . $id . ',"firstName":"' . $name_first . '","lastName":"' . $name_last . '","error":"'.$err.'"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	

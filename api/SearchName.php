@@ -15,7 +15,8 @@
 	$conn = new mysqli("localhost", "TheBeast", "G3H0Fs55uhrWQ48Prb", "utopia");
 	if ($conn->connect_error) 
 	{
-		returnWithError( $conn->connect_error );
+		// Return connection error
+		returnWithinfo( "",$conn->connect_error );
 	} 
 	//Code to search name
 	else
@@ -44,11 +45,13 @@
 		//If no contacts returns no records found
 		if( $searchCount == 0 )
 		{
-			returnWithError( "No Records Found" );
+			// Return error that the nothing was found
+			returnWithInfo( "","No Records Found" );
 		}
 		else
 		{
-			returnWithInfo( $searchResults );
+			// Return the contacts that have the search results
+			returnWithInfo( $searchResults, "" );
 		}
 		
 		$stmt->close();
@@ -65,16 +68,10 @@
 		header('Content-type: application/json');
 		echo $obj;
 	}
-	//Returns Erro
-	function returnWithError( $err )
+	//Returns response
+	function returnWithInfo( $searchResults, $err )
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-	//Returns search results
-	function returnWithInfo( $searchResults )
-	{
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+		$retValue = '{"results":[' . $searchResults . '],"error":"'.$err.'"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	

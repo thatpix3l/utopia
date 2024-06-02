@@ -28,32 +28,49 @@
     // Trying connection
 	if ($conn->connect_error) 
 	{
-		returnWithError( $conn->connect_error );
+		// Return connection error
+		returnWithInfo("",0,"","","", "",$conn->connect_error );
 	} 
 	else
 	{
-        // Statement to edit the parameters
-		$stmt = $conn->prepare("UPDATE contact SET name_first=?, name_last=?, phone=?, email=? WHERE ID=? AND user_id=?");
-		// This makes the connection safer (avoid injection attacks)
-		$stmt->bind_param("ssssii", $firstName, $lastName, $phoneNumber, $email, $id, $user_id); 
+		$stmt = $conn->prepare("SELECT * FROM contact WHERE id=? AND user_id=?");
+		$stmt->bind_param("ii", $id, $user_id); 
+		$stmt->execute();
 
-		// In case any of the input fields are equal to null or empty
-		if($id == NULL or $firstName == "" or $lastName == "" or $phoneNumber == "" or $email == "")
+		$result = $stmt->get_result();
+		if( $result->num_rows == 0)
 		{
-			returnWithError("The fields cannot be null");
-			exit();
+			// If the contact is not on the database
+			returnWithInfo("", 0, "", "", "", "", "Contact records not found");
 		}
-   
-   
-		// Checking if the execution worked or not
-		if($stmt->execute())
-   		{
-     		returnWithSuccess("Contact (id = ".$id.") changed to ".$firstName." ".$lastName." Phone: ".$phoneNumber." Email: ".$email);
-   		}
-   		else
-   		{
-     		returnWithError("Error updating the contact: ".$stmt->error);
-   		}
+		else
+		{
+		        // Statement to edit the parameters
+				$stmt = $conn->prepare("UPDATE contact SET name_first=?, name_last=?, phone=?, email=? WHERE id=? AND user_id=?");
+				// This makes the connection safer (avoid injection attacks)
+				$stmt->bind_param("ssssii", $firstName, $lastName, $phoneNumber, $email, $id, $user_id); 
+		
+				// In case any of the input fields are equal to null or empty
+				if($id == NULL or $firstName == "" or $lastName == "" or $phoneNumber == "" or $email == "")
+				{
+					// Return error if fields are empty or null
+					returnWithInfo("", 0, "", "", "", "","The fields cannot be null");
+				}
+				else
+				{
+					// Checking if the execution worked or not
+					if($stmt->execute())
+					{
+						// Return updated information of the contact
+						  returnWithInfo("Contact updated successfully", $id, $firstName, $lastName, $phoneNumber, $email, "");
+					}
+					else
+					{
+						// Return error in executing the update
+						  returnWithInfo("", 0, "", "", "", "","Error updating the contact: ".$stmt->error);
+					}
+				}
+		}
    
 		$stmt->close();
 		$conn->close();
@@ -72,18 +89,11 @@
 		echo $obj;
 	}
 
-    // Return the error
-    function returnWithError( $err )
+	// Return response
+	function returnWithInfo( $success, $id, $firstName, $lastName, $phoneNumber, $email, $err )
 	{
-		$retValue = '{"error":"' . $err . '"}';
+		$retValue = '{"success": "'.$success.'","id": '.$id.',"firstName": "'.$firstName.'","lastName": "'.$lastName.'","phone": "'.$phoneNumber.'","email": "'.$email.'","error": "'.$err.'"}';
 		sendResultInfoAsJson( $retValue );
 	}
- 
- 	// Return a success message for testing purposes
-   	function returnWithSuccess( $message )
-   	{
-     	$retValue = '{"success":"' . $message . '"}';
-		sendResultInfoAsJson( $retValue );
-   	}
 
 ?>
