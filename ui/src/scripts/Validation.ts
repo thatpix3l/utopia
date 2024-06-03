@@ -51,7 +51,9 @@ export function validateEmail(email: string) {
 
 export function validatePhone(phone: string) {
     const issues: string[] = [];
-    if (!phone.match(/\(\d{3}\) \d{3}-\d{4}/)) {
+    if (!phone.match(/^\(\d{3}\) \d{3}-\d{4}$/)) {
         issues.push("Phone must be of the form (###) ###-####");
     }
+
+    return issues;
 }

@@ -1,17 +1,15 @@
 import $ from "jquery";
 import { clearCookie, getUserFromCookie } from "./Cookies";
-// import { user } from "./Account";
 import { request } from "./API";
 import { Contact } from "./types/Entity";
-import { validateEmail, validatePartialName, validatePhone } from "./Validation";
-
+import { validatePartialName, validatePhone } from "./Validation";
 
 $(() => {
     const user = getUserFromCookie();
     if (!user.id) {
         // comment these two lines while testing
-        window.location.href = "/";
-        return;
+        // window.location.href = "/";
+        // return;
     }
 
     const searchInput = $<HTMLInputElement>("#searchInput");
@@ -20,18 +18,11 @@ $(() => {
 
     const pagesHolder = $<HTMLDivElement>("#pagesHolder");
     const addOverlay = $<HTMLDivElement>("#addOverlay");
-    const addInputs = addOverlay.find("input:is([type='text']");
 
     const addFirstNameInput = $<HTMLInputElement>("#addFirstNameInput");
     const addLastNameInput = $<HTMLInputElement>("#addLastNameInput");
     const addPhoneInput = $<HTMLInputElement>("#addPhoneInput");
     const addEmailInput = $<HTMLInputElement>("#addEmailInput");
-    const addErrorHolder = $<HTMLParagraphElement>("#addErrorHolder");
-    const addConfirmButton = $<HTMLButtonElement>("#addConfirmButton");
-    // const addCancelButton = $<HTMLButtonElement>("#addCancelButton");
-
-    // start disabled
-    addConfirmButton.prop("disabled", true);
 
     $("#logoutButton").on("click", () => {
         clearCookie();
@@ -110,52 +101,14 @@ $(() => {
         const errors = validatePartialName(addFirstNameInput.val() ?? "", "First").concat(
             validatePartialName(addLastNameInput.val() ?? "", "Last"),
             validatePhone(addPhoneInput.val() ?? ""),
-            validateEmail(addEmailInput.val() ?? ""),
+            validatePhone(addPhoneInput.val() ?? "")
         );
         console.log(errors);
 
-        addErrorHolder.html(errors.join("<br />"));
-        addConfirmButton.prop("disabled", !!errors.length);
+        loginErrorHolder.html(errors.join("<br />"));
+        loginButton.prop("disabled", !!errors.length);
 
         return !!errors.length;
     };
 
-    const addContact = () => {
-        // console.log(loginUsernameInput.val(), loginPasswordInput.val());
-        request("AddContact",
-            {
-                user_id: user.id,
-                name_first: addFirstNameInput.val() ?? "",
-                name_last: addLastNameInput.val() ?? "",
-                phone: addPhoneInput.val() ?? "",
-                email: addEmailInput.val() ?? "",
-            },
-            (response) => {
-                console.log(response);
-            },
-            (errorMessage) => {
-                console.log(errorMessage);
-            });
-
-        addInputs.val("");
-        addOverlay.addClass("inactive");
-    };
-
-    addInputs.on("focus", (event) => {
-        validateAddContact();
-    });
-    addInputs.on("keyup", (event) => {
-        if (validateAddContact()) {
-            return;
-        }
-
-        if (event.key === "Enter") {
-            addContact();
-        }
-    });
-    addInputs.on("blur", (event) => {
-        addErrorHolder.text("");
-    });
-
-    addConfirmButton.on("click", addContact);
 });

@@ -63,7 +63,11 @@
                                 d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5l-1.5 1.5l-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14S14 12 14 9.5S12 5 9.5 5"
                             />
                         </svg></button>
-                    <button>
+                    <button
+                        id="addButton"
+                        tooltip="Add Contact"
+                        alt="Add Contact"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -93,7 +97,10 @@
             <!-- TODO: programmatically add these (however many fit with buttons on each end to jump all the way to either end) -->
             <div style="display: flex; gap: 10px;">
                 <p>Pages</p>
-                <div id="pagesHolder" class="pages">
+                <div
+                    id="pagesHolder"
+                    class="pages"
+                >
                     <button>1</button>
                 </div>
             </div>
@@ -101,6 +108,7 @@
         </div>
     </div>
     <div
+        id="addOverlay"
         class="inactive"
         style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 1;"
     >
@@ -116,6 +124,7 @@
                     <label>
                         First Name
                         <input
+                            id="addFirstNameInput"
                             type="text"
                             placeholder="John"
                         />
@@ -124,6 +133,7 @@
                     <label>
                         Last Name
                         <input
+                            id="addLastNameInput"
                             type="text"
                             placeholder="Doe"
                         />
@@ -132,6 +142,7 @@
                     <label>
                         Phone Number
                         <input
+                            id="addPhoneInput"
                             type="text"
                             placeholder="(123) 456-7890"
                         />
@@ -140,22 +151,22 @@
                     <label>
                         Email
                         <input
+                            id="addEmailInput"
                             type="text"
                             placeholder="example@email.com"
                         />
                     </label>
                 </div>
                 <div style="display: inline;">
-                    <!-- <br /> -->
                     <p><i>All fields are required</i></p>
                     <p
-                        id="loginErrorHolder"
+                        id="addErrorHolder"
                         class="error"
                     ></p>
                 </div>
                 <div class="submit">
-                    <button id="loginButton">Add</button>
-                    <button id="loginButton">Cancel</button>
+                    <button id="addConfirmButton">Add</button>
+                    <button id="addCancelButton">Cancel</button>
                 </div>
             </div>
         </div>
