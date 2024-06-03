@@ -146,6 +146,8 @@
 .form .submit {
     text-align: center;
     margin-top: 20px;
+    /* margin: 0px; */
+    padding: 0px;
 }
 
 /* TODO: make sure this contrast with the background is good enough and doesn't have a bad combination for the colorblind */
@@ -160,4 +162,8 @@
 .error:empty {
     /* display: none; */
     scale: 0%;
+}
+
+.inactive {
+    display: none;
 }
