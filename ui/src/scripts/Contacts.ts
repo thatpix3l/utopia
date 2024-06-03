@@ -13,7 +13,7 @@ $(() => {
         window.location.href = "/";
         return;
     }
-
+    const searchButton = $<HTMLButtonElement>("#searchButton");
     const searchInput = $<HTMLInputElement>("#searchInput");
 
     const contactsTable = $<HTMLDivElement>("#contactsTable");
@@ -39,6 +39,7 @@ $(() => {
     });
 
     let contacts: Contact[] = [];
+    let currentPage = 0;
     function loadPage(page = 1) {
         contactsTable.children(":not(:first-child)").remove();
 
@@ -64,6 +65,22 @@ $(() => {
             editButton.innerText = "Edit";
             let deleteButton = document.createElement("button");
             deleteButton.innerText = "Delete";
+            $(deleteButton).on("click", () => {
+                if (confirm(`Warning, this will delete the contact with the name '${contact.firstName} ${contact.lastName}'.`)) {
+                    request("DeleteContact",
+                        {
+                            id: contact.id,
+                            user_id: user.id,
+                        },
+                        (response) => {
+                            console.log(response);
+                            searchButton.trigger("click");
+                        },
+                        (errorMessage) => {
+                            console.log(errorMessage);
+                        });
+                }
+            });
             actions.append(editButton, deleteButton);
 
             row.append(name, email, phone, actions);
@@ -72,7 +89,7 @@ $(() => {
         }
     }
 
-    $("#searchButton").on("click", () => {
+    searchButton.on("click", () => {
         request("SearchName",
             { user_id: user.id, search: searchInput.val() ?? "" },
             (response) => {
@@ -85,7 +102,8 @@ $(() => {
                     button.innerText = i.toString();
                     $(button).on("click", () => {
                         console.log("page", i);
-                        loadPage(i);
+                        loadPage(Math.min(currentPage, pageCount) || i);
+                        currentPage = 0;
                     });
                     pagesHolder.append(button);
                 }
@@ -95,6 +113,12 @@ $(() => {
             (error) => {
             }
         );
+    });
+    searchInput.on("keyup", (event) => {
+        if (event.key === "Enter") {
+            searchButton.trigger("click");
+            addContact();
+        }
     });
 
     $("#addButton").on("click", () => {
@@ -132,6 +156,7 @@ $(() => {
             },
             (response) => {
                 console.log(response);
+                searchButton.trigger("click");
             },
             (errorMessage) => {
                 console.log(errorMessage);
