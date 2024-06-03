@@ -1,5 +1,6 @@
 .wrapper {
     place-self: center;
+    max-width: 95vw;
 }
 
 /* TODO: this is slightly lopsided vertically due to the navbar, might want to fix? */
