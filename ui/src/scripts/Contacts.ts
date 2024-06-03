@@ -1,5 +1,8 @@
 import $ from "jquery";
 import { clearCookie, getUserFromCookie } from "./Cookies";
+// import { user } from "./Account";
+import { request } from "./API";
+import { Contact } from "./types/Entity";
 
 
 $(() => {
@@ -10,75 +13,87 @@ $(() => {
         return;
     }
 
+    const searchInput = $<HTMLInputElement>("#searchInput");
+
+    const contactsTable = $<HTMLDivElement>("#contactsTable");
+
+    const pagesHolder = $<HTMLDivElement>("#pagesHolder");
+
     $("#logoutButton").on("click", () => {
         clearCookie();
         window.location.href = "/";
     });
-});
 
+    let contacts: Contact[] = [];
+    function loadPage(page = 1) {
+        contactsTable.children(":not(:first-child)").remove();
 
+        const offset = (page - 1) * 10;
+        for (let i = offset; i < offset + 10 && i < contacts.length; i++) {
+            const contact = contacts[i];
 
+            let row = document.createElement("div");
+            row.classList.add("row");
+            $(row).data("id", contact.id);
 
-// TODO: need to migrate this to ts + jquery
+            let name = document.createElement("p");
+            name.innerText = `${contact.firstName} ${contact.lastName}`;
 
-/*
-const contacts = [];
-function searchContacts() {
-    const searchQuery = document.getElementById('search').value.toLowerCase();
-    const filteredContacts = contacts.filter(contact => 
-        contact.name.toLowerCase().includes(searchQuery) || 
-        contact.email.toLowerCase().includes(searchQuery) || 
-        contact.phone.includes(searchQuery)
-    );
-    populateContactsTable(filteredContacts);
-}
+            let email = document.createElement("p");
+            email.innerText = contact.email;
 
-function showAddContactForm() {
-    document.getElementById('addContactForm').style.display = 'block';
-}
+            let phone = document.createElement("p");
+            phone.innerText = contact.phone;
 
-function hideAddContactForm() {
-    document.getElementById('addContactForm').style.display = 'none';
-}
+            let actions = document.createElement("div");
+            let editButton = document.createElement("button");
+            editButton.innerText = "Edit";
+            let deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+            actions.append(editButton, deleteButton);
 
-function addContact(event) {
-    event.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    contacts.push({ name, email, phone });
-    populateContactsTable(contacts);
-    hideAddContactForm();
-}
+            row.append(name, email, phone, actions);
 
-function editContact(index) {
-    const contact = contacts[index];
-    document.getElementById('name').value = contact.name;
-    document.getElementById('email').value = contact.email;
-    document.getElementById('phone').value = contact.phone;
-    showAddContactForm();
-    contacts.splice(index, 1);
-}
+            contactsTable.append(row);
+        }
+    }
 
-function deleteContact(index) {
-    contacts.splice(index, 1);
-    populateContactsTable(contacts);
-}
+    $("#searchButton").on("click", () => {
+        request("SearchName",
+            { user_id: user.id, search: searchInput.val() ?? "" },
+            (response) => {
+                contacts = response.results;
 
-function populateContactsTable(contactsToDisplay) {
-    const contactTableBody = document.getElementById('contactTableBody');
-    contactTableBody.innerHTML = '';
-    contactsToDisplay.forEach((contact, index) => {
-        const row = `<tr>
-            <td>${contact.name}</td>
-            <td>${contact.email}</td>
-            <td>${contact.phone}</td>
-            <td>
-                <span class="edit" onclick="editContact(${index})">Edit</span> |
-                <span class="delete" onclick="deleteContact(${index})">Delete</span>
-            </td>
-        </tr>`;
-        contactTableBody.innerHTML += row;
+                pagesHolder.empty();
+                let pageCount = Math.max(Math.ceil(contacts.length / 10), 1);
+                for(let i = 1; i <= pageCount; i++) {
+                    let button = document.createElement("button");
+                    button.innerText = i.toString();
+                    $(button).on("click", () => {
+                        console.log("page", i);
+                        loadPage(i);
+                    });
+                    pagesHolder.append(button);
+                }
+
+                loadPage();
+            },
+            (error) => {
+            }
+        );
     });
-}
-*/
+
+    // returns whether there are errors
+    // const validateContact = () => {
+    //     const errors = validateUsername(loginUsernameInput.val() ?? "").concat(
+    //         validatePassword(loginPasswordInput.val() ?? "")
+    //     );
+    //     console.log(errors);
+
+    //     loginErrorHolder.html(errors.join("<br />"));
+    //     loginButton.prop("disabled", !!errors.length);
+
+    //     return !!errors.length;
+    // };
+
+});

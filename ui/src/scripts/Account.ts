@@ -6,6 +6,8 @@ import { storeUserToCookie } from "./Cookies";
 import { validatePartialName, validatePassword, validateUsername } from "./Validation";
 const md5 = require("md5");
 
+// export let user: User = { id: 0, firstName: "", lastName: "" };
+
 $(() => {
     let user: User = { id: 0, firstName: "", lastName: "" };
 
