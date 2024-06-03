@@ -107,6 +107,48 @@
                     <p>123-456-7890</p>
                     <p>+ -</p>
                 </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
+                <div class="row">
+                    <p>John
+                        Doe</p>
+                    <p>exampl@gmail.com</p>
+                    <p>123-456-7890</p>
+                    <p>+ -</p>
+                </div>
             </div>
             <!-- TODO: programmatically add these (however many fit with buttons on each end to jump all the way to either end) -->
             <div style="display: flex; gap: 10px;">
@@ -165,43 +207,68 @@
                 </div>
             </div>
             <!-- TODO: format below -->
-            <div
-                id="addContactForm"
-                style="display: none;"
-            >
-                <h3>Add Contact</h3>
-                <form onsubmit="addContact(event)">
-                    <label for="name">Name:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        required
-                    >
-                    <br>
-                    <label for="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        required
-                    >
-                    <br>
-                    <label for="phone">Phone:</label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        required
-                    >
-                    <br>
-                    <button type="submit">Save</button>
-                    <button
-                        type="button"
-                        onclick="hideAddContactForm()"
-                    >Cancel</button>
-                </form>
+        </div>
+    </div>
+    <div
+        class="addOverlay"
+        style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 1;"
+    >
+        <div style="background-color: #0008; position:absolute; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+
+        <div
+            class="form"
+            style="display:flex; position: relative; align-items: center; justify-content: center; width: 100%; height: 100%;"
+        >
+            <div class="holder">
+                <h1 style="text-align: center; margin: 0px;">Add Contact</h1>
+                <div class="edit">
+                    <label>
+                        First Name
+                        <input
+                            type="text"
+                            placeholder="John"
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Last Name
+                        <input
+                            type="text"
+                            placeholder="Doe"
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Phone Number
+                        <input
+                            type="text"
+                            placeholder="(123) 456-7890"
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Email
+                        <input
+                            type="text"
+                            placeholder="example@email.com"
+                        />
+                    </label>
+                </div>
+                <div style="display: inline;">
+                    <!-- <br /> -->
+                    <p><i>All fields are required</i></p>
+                    <p
+                        id="loginErrorHolder"
+                        class="error"
+                    ></p>
+                </div>
+                <div class="submit">
+                    <button id="loginButton">Add</button>
+                    <button id="loginButton">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
-
 
 </body>
 
