@@ -10,8 +10,8 @@ $(() => {
     const user = getUserFromCookie();
     if (!user.id) {
         // comment these two lines while testing
-        window.location.href = "/";
-        return;
+        // window.location.href = "/";
+        // return;
     }
     const searchButton = $<HTMLButtonElement>("#searchButton");
     const searchInput = $<HTMLInputElement>("#searchInput");
@@ -162,7 +162,7 @@ $(() => {
             validatePhone(addPhoneInput.val() ?? ""),
             validateEmail(addEmailInput.val() ?? ""),
         );
-        console.log(errors);
+        // console.log(errors);
 
         addErrorHolder.html(errors.join("<br />"));
         addConfirmButton.prop("disabled", !!errors.length);
@@ -223,7 +223,7 @@ $(() => {
             validatePhone(editPhoneInput.val() ?? ""),
             validateEmail(editEmailInput.val() ?? ""),
         );
-        console.log(errors);
+        // console.log(errors);
 
         editErrorHolder.html(errors.join("<br />"));
         editConfirmButton.prop("disabled", !!errors.length);

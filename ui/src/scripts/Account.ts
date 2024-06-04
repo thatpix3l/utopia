@@ -88,7 +88,7 @@ $(() => {
                 // loginErrorHolder.text(errorMessage);
 
                 // FIXME: hopefully the API can change the response to be something like this at some point
-                loginErrorHolder.text("Invalid Username");
+                loginErrorHolder.text("Invalid credentials");
             });
     };
 
@@ -117,7 +117,7 @@ $(() => {
             validatePartialName(signupFirstNameInput.val() ?? "", "First"),
             validatePartialName(signupLastNameInput.val() ?? "", "Last")
         );
-        console.log(errors);
+        // console.log(errors);
 
         signupErrorHolder.html(errors.join("<br />"));
         signupButton.prop("disabled", !!errors.length);
@@ -149,7 +149,8 @@ $(() => {
             (errorMessage) => {
                 console.log(errorMessage);
 
-                signupErrorHolder.text(errorMessage);
+                // FIXME: hopefully the API can change the response to be something like this at some point
+                signupErrorHolder.text("Account already exists");
             });
     };
 
