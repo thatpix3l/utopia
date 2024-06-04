@@ -49,10 +49,10 @@ $(() => {
     });
 
     let contacts: Contact[] = [];
-    let currentPage = 0;
+    let activePage = 0;
     let activeContactID = 0;
     function loadPage(page = 1) {
-        currentPage = page;
+        activePage = page;
 
         contactsTable.children(":not(:first-child)").remove();
 
@@ -124,13 +124,12 @@ $(() => {
                     button.innerText = i.toString();
                     $(button).on("click", () => {
                         console.log("page", i);
-                        loadPage(Math.min(currentPage, pageCount) || i);
-                        currentPage = 0;
+                        loadPage(i);
                     });
                     pagesHolder.append(button);
                 }
 
-                loadPage();
+                loadPage(Math.min(activePage, pageCount) ?? 1);
             },
             (error) => {
             }
