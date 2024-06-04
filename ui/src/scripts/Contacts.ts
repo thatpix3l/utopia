@@ -138,6 +138,18 @@ $(() => {
                 loadPage(Math.min(activePage, pageCount) || 1);
             },
             (error) => {
+                contacts = [];
+
+                pagesHolder.empty();
+                let button = document.createElement("button");
+                button.innerText = "1";
+                $(button).on("click", () => {
+                    console.log("page", 1);
+                    loadPage(1);
+                });
+                pagesHolder.append(button);
+
+                loadPage(1);
             }
         );
     });
