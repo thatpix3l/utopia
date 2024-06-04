@@ -1,26 +1,25 @@
----
-swagger: "2.0"
+swagger: '2.0'
 info:
   description: This is the API documentation for the COP 4331 Small Project team 3
   version: 1.0.0
   title: Utopia Contact Manager
-  contact:
+  # put the contact info for your development or API team
+  contact: {
     name: "Rodrigo Costa, Jacob Mckiernan"
+  }
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-host: utopia.cleanmango.com
-basePath: /LAMPAPI
-schemes:
-- http
+
 paths:
   /Login.php:
     post:
       tags:
       - Users
       summary: Logs in to the contact manager
-      description: Logs in to the contact manager
       operationId: loginUser
+      description: Logs in to the contact manager
       consumes:
       - application/json
       produces:
@@ -29,25 +28,37 @@ paths:
       - in: body
         name: loginItem
         description: Login
-        required: false
         schema:
           $ref: '#/definitions/Login'
       responses:
-        "200":
+        200:
           description: OK
           schema:
-            $ref: '#/definitions/inline_response_200'
-        "404":
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              firstName:
+                type: string
+                example: "John"
+              lastName:
+                type: string
+                example: "Doe"
+              error:
+                type: string
+                example: ""
+        404:
           description: URL Not Found
-        "500":
+        500:
           description: Server Error
   /RegisterUser.php:
     post:
       tags:
       - Users
       summary: Register a new user to the application
-      description: Registers a new user to the contact manager
       operationId: registerUser
+      description: Registers a new user to the contact manager
       consumes:
       - application/json
       produces:
@@ -56,25 +67,31 @@ paths:
       - in: body
         name: registerItem
         description: Register
-        required: false
         schema:
           $ref: '#/definitions/Register'
       responses:
-        "200":
+        200:
           description: OK
           schema:
-            $ref: '#/definitions/inline_response_200_1'
-        "404":
+            type: object
+            properties:
+              success:
+                type: string 
+                example: "User added succefully"
+              error:
+                type: string
+                example: ""
+        404:
           description: URL Not Found
-        "500":
+        500:
           description: Server Error
   /AddContact.php:
     post:
       tags:
       - Contacts
       summary: Adds a contact
-      description: Adds a contact to the utopia app database
       operationId: addContact
+      description: Adds a contact to the utopia app database
       consumes:
       - application/json
       produces:
@@ -83,25 +100,31 @@ paths:
       - in: body
         name: contactItem
         description: Contact
-        required: false
         schema:
           $ref: '#/definitions/AddContact'
       responses:
-        "200":
+        200:
           description: OK
           schema:
-            $ref: '#/definitions/inline_response_200_2'
-        "404":
+            type: object
+            properties:
+              success:
+                type: string 
+                example: "Contact added successfully"
+              error:
+                type: string
+                example: ""
+        404:
           description: URL Not Found
-        "500":
+        500:
           description: Server Error
   /SearchName.php:
     post:
       tags:
       - Contacts
       summary: Searches contacts
-      description: Searches contacts from the utopia app database
       operationId: searchContact
+      description: Searches contacts from the utopia app database
       consumes:
       - application/json
       produces:
@@ -110,25 +133,48 @@ paths:
       - in: body
         name: searchItem
         description: Contact Search
-        required: false
         schema:
           $ref: '#/definitions/SearchName'
       responses:
-        "200":
+        200:
           description: OK
           schema:
-            $ref: '#/definitions/inline_response_200_3'
-        "404":
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    firstName:
+                      type: string
+                      example: "John"
+                    lastName:
+                      type: string
+                      example: "Doe"
+                    phone:
+                      type: string
+                      example: "1234567890"
+                    email:
+                      type: string
+                      example: "email@email.com"
+              error:
+                type: string
+                example: ""
+        404:
           description: URL Not Found
-        "500":
+        500:
           description: Server Error
   /EditContact.php:
     post:
       tags:
       - Contacts
       summary: Edit contacts
-      description: Edit and update information for contacts already in the database
       operationId: editContact
+      description: Edit and update information for contacts already in the database
       consumes:
       - application/json
       produces:
@@ -137,25 +183,46 @@ paths:
       - in: body
         name: editItem
         description: Edit Contact
-        required: false
         schema:
           $ref: '#/definitions/EditContact'
       responses:
-        "200":
+        200:
           description: OK
           schema:
-            $ref: '#/definitions/inline_response_200_4'
-        "404":
+            type: object
+            properties:
+              success:
+                type: string 
+                example: "Contact updated successfully"
+              id:
+                type: integer
+                example: 1
+              firstName:
+                type: string
+                example: "John"
+              lastName:
+                type: string
+                example: "Doe"
+              phone:
+                type: string
+                example: "1234567890"
+              email:
+                type: string
+                example: "email@email.com"
+              error:
+                type: string
+                example: ""
+        404:
           description: URL Not Found
-        "500":
+        500:
           description: Server Error
   /DeleteContact.php:
     post:
       tags:
       - Contacts
       summary: Delete contacts
-      description: Delete contact from the utopia app database
       operationId: deleteContact
+      description: Delete contact from the utopia app database
       consumes:
       - application/json
       produces:
@@ -164,96 +231,102 @@ paths:
       - in: body
         name: deleteItem
         description: Delete Contact
-        required: false
         schema:
           $ref: '#/definitions/DeleteContact'
       responses:
-        "200":
+        200:
           description: OK
           schema:
-            $ref: '#/definitions/inline_response_200_5'
-        "404":
+            type: object
+            properties:
+              success:
+                type: string 
+                example: "Contact (id = 1) Deleted from the database"
+              error:
+                type: string
+                example: ""
+        404:
           description: URL Not Found
-        "500":
+        500:
           description: Server Error
 definitions:
   Login:
     type: object
     required:
-    - password
     - username
+    - password
     properties:
       username:
         type: string
-        example: fred
+        example: "fred"
       password:
         type: string
-        example: secret
+        example: "secret"
   Register:
     type: object
     required:
+    - username
+    - password
     - name_first
     - name_last
-    - password
-    - username
     properties:
       username:
         type: string
-        example: fred
+        example: "fred"
       password:
         type: string
-        example: secret
+        example: "secret"
       name_first:
         type: string
-        example: John
+        example: "John"
       name_last:
         type: string
-        example: Doe
+        example: "Doe"
   AddContact:
     type: object
     required:
-    - email
+    - user_id
     - name_first
     - name_last
     - phone
-    - user_id
+    - email
     properties:
       user_id:
         type: integer
         example: 1
       name_first:
         type: string
-        example: John
+        example: "John"
       name_last:
         type: string
-        example: Doe
+        example: "Doe"
       phone:
         type: string
         example: "1234567890"
       email:
         type: string
-        example: email@email.com
+        example: "email@email.com"
   SearchName:
     type: object
     required:
-    - search
     - user_id
+    - search
     properties:
       user_id:
         type: integer
         example: 1
       search:
         type: string
-        example: jo
+        example: "jo"
   EditContact:
     type: object
     required:
-    - email
     - id
+    - user_id
     - name_first
     - name_last
     - phone
-    - user_id
+    - email
     properties:
       id:
         type: integer
@@ -263,16 +336,16 @@ definitions:
         example: 1
       name_first:
         type: string
-        example: John
+        example: "John"
       name_last:
         type: string
-        example: Doe
+        example: "Doe"
       phone:
         type: string
         example: "1234567890"
       email:
         type: string
-        example: email@email.com
+        example: "email@email.com"
   DeleteContact:
     type: object
     required:
@@ -285,97 +358,8 @@ definitions:
       user_id:
         type: integer
         example: 1
-  inline_response_200:
-    type: object
-    properties:
-      id:
-        type: integer
-        example: 1
-      firstName:
-        type: string
-        example: John
-      lastName:
-        type: string
-        example: Doe
-      error:
-        type: string
-        example: ""
-  inline_response_200_1:
-    type: object
-    properties:
-      success:
-        type: string
-        example: User added succefully
-      error:
-        type: string
-        example: ""
-  inline_response_200_2:
-    type: object
-    properties:
-      success:
-        type: string
-        example: Contact added successfully
-      error:
-        type: string
-        example: ""
-  inline_response_200_3_results:
-    type: object
-    properties:
-      id:
-        type: integer
-        example: 1
-      firstName:
-        type: string
-        example: John
-      lastName:
-        type: string
-        example: Doe
-      phone:
-        type: string
-        example: "1234567890"
-      email:
-        type: string
-        example: email@email.com
-  inline_response_200_3:
-    type: object
-    properties:
-      results:
-        type: array
-        items:
-          $ref: '#/definitions/inline_response_200_3_results'
-      error:
-        type: string
-        example: ""
-  inline_response_200_4:
-    type: object
-    properties:
-      success:
-        type: string
-        example: Contact updated successfully
-      id:
-        type: integer
-        example: 1
-      firstName:
-        type: string
-        example: John
-      lastName:
-        type: string
-        example: Doe
-      phone:
-        type: string
-        example: "1234567890"
-      email:
-        type: string
-        example: email@email.com
-      error:
-        type: string
-        example: ""
-  inline_response_200_5:
-    type: object
-    properties:
-      success:
-        type: string
-        example: Contact (id = 1) Deleted from the database
-      error:
-        type: string
-        example: ""
+
+host: utopia.cleanmango.com
+basePath: /LAMPAPI
+schemes:
+- http
