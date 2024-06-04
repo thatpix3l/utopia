@@ -24,6 +24,9 @@ export function validatePassword(password: string) {
     if (!password.match(/[^A-Za-z0-9]/)) {
         issues.push("Password must contain a special character");
     }
+    if (password.length < 8) {
+        issues.push("Password must be at least 8 characters long");
+    }
 
     return issues;
 }
