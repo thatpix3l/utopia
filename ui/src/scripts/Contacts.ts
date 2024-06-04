@@ -189,6 +189,7 @@ $(() => {
             });
 
         addInputs.val("");
+        addConfirmButton.prop("disabled", true); // reset its state since all inputs got wiped
         addOverlay.addClass("inactive");
     };
 
@@ -251,6 +252,7 @@ $(() => {
 
         activeContactID = 0;
         editInputs.val("");
+        editConfirmButton.prop("disabled", true); // reset its state since all inputs got wiped
         editOverlay.addClass("inactive");
     };
 
