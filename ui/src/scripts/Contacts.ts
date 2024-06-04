@@ -10,8 +10,8 @@ $(() => {
     const user = getUserFromCookie();
     if (!user.id) {
         // comment these two lines while testing
-        // window.location.href = "/";
-        // return;
+        window.location.href = "/";
+        return;
     }
     const searchButton = $<HTMLButtonElement>("#searchButton");
     const searchInput = $<HTMLInputElement>("#searchInput");
