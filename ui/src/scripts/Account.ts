@@ -58,7 +58,7 @@ $(() => {
         const errors = validateUsername(loginUsernameInput.val() ?? "").concat(
             validatePassword(loginPasswordInput.val() ?? "")
         );
-        console.log(errors);
+        // console.log(errors);
 
         loginErrorHolder.html(errors.join("<br />"));
         loginButton.prop("disabled", !!errors.length);

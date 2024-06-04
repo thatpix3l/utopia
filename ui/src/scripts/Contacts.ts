@@ -54,6 +54,8 @@ $(() => {
     function loadPage(page = 1) {
         activePage = page;
 
+        // console.log(contacts);
+
         contactsTable.children(":not(:first-child)").remove();
 
         const offset = (page - 1) * 10;
@@ -129,7 +131,7 @@ $(() => {
                     pagesHolder.append(button);
                 }
 
-                loadPage(Math.min(activePage, pageCount) ?? 1);
+                loadPage(Math.min(activePage, pageCount) || 1);
             },
             (error) => {
             }
