@@ -52,6 +52,8 @@ $(() => {
     let currentPage = 0;
     let activeContactID = 0;
     function loadPage(page = 1) {
+        currentPage = page;
+
         contactsTable.children(":not(:first-child)").remove();
 
         const offset = (page - 1) * 10;
@@ -76,7 +78,12 @@ $(() => {
             editButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>`;
             $(editButton).on("click", () => {
                 editOverlay.removeClass("inactive");
+
                 activeContactID = contact.id;
+                editFirstNameInput.val(contact.firstName);
+                editLastNameInput.val(contact.lastName);
+                editPhoneInput.val(contact.phone);
+                editEmailInput.val(contact.email);
             });
             let deleteButton = document.createElement("button");
             deleteButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6z"/></svg>`;
