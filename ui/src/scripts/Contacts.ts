@@ -19,9 +19,9 @@ $(() => {
     const contactsTable = $<HTMLDivElement>("#contactsTable");
 
     const pagesHolder = $<HTMLDivElement>("#pagesHolder");
+
     const addOverlay = $<HTMLDivElement>("#addOverlay");
     const addInputs = addOverlay.find("input:is([type='text']");
-
     const addFirstNameInput = $<HTMLInputElement>("#addFirstNameInput");
     const addLastNameInput = $<HTMLInputElement>("#addLastNameInput");
     const addPhoneInput = $<HTMLInputElement>("#addPhoneInput");
@@ -30,8 +30,18 @@ $(() => {
     const addConfirmButton = $<HTMLButtonElement>("#addConfirmButton");
     // const addCancelButton = $<HTMLButtonElement>("#addCancelButton");
 
+    const editOverlay = $<HTMLDivElement>("#editOverlay");
+    const editInputs = editOverlay.find("input:is([type='text']");
+    const editFirstNameInput = $<HTMLInputElement>("#editFirstNameInput");
+    const editLastNameInput = $<HTMLInputElement>("#editLastNameInput");
+    const editPhoneInput = $<HTMLInputElement>("#editPhoneInput");
+    const editEmailInput = $<HTMLInputElement>("#editEmailInput");
+    const editErrorHolder = $<HTMLParagraphElement>("#editErrorHolder");
+    const editConfirmButton = $<HTMLButtonElement>("#editConfirmButton");
+
     // start disabled
     addConfirmButton.prop("disabled", true);
+    editConfirmButton.prop("disabled", true);
 
     $("#logoutButton").on("click", () => {
         clearCookie();
@@ -40,6 +50,7 @@ $(() => {
 
     let contacts: Contact[] = [];
     let currentPage = 0;
+    let activeContactID = 0;
     function loadPage(page = 1) {
         contactsTable.children(":not(:first-child)").remove();
 
@@ -49,7 +60,7 @@ $(() => {
 
             let row = document.createElement("div");
             row.classList.add("row");
-            $(row).data("id", contact.id);
+            // $(row).data("id", contact.id);
 
             let name = document.createElement("p");
             name.innerText = `${contact.firstName} ${contact.lastName}`;
@@ -63,6 +74,10 @@ $(() => {
             let actions = document.createElement("div");
             let editButton = document.createElement("button");
             editButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>`;
+            $(editButton).on("click", () => {
+                editOverlay.removeClass("inactive");
+                activeContactID = contact.id;
+            });
             let deleteButton = document.createElement("button");
             deleteButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6z"/></svg>`;
             $(deleteButton).on("click", () => {
@@ -117,7 +132,6 @@ $(() => {
     searchInput.on("keyup", (event) => {
         if (event.key === "Enter") {
             searchButton.trigger("click");
-            addContact();
         }
     });
 
@@ -183,4 +197,66 @@ $(() => {
     });
 
     addConfirmButton.on("click", addContact);
+
+
+    $("#editCancelButton").on("click", () => {
+        editOverlay.addClass("inactive");
+    });
+
+    // returns whether there are errors
+    const validateEditContact = () => {
+        const errors = validatePartialName(editFirstNameInput.val() ?? "", "First").concat(
+            validatePartialName(editLastNameInput.val() ?? "", "Last"),
+            validatePhone(editPhoneInput.val() ?? ""),
+            validateEmail(editEmailInput.val() ?? ""),
+        );
+        console.log(errors);
+
+        editErrorHolder.html(errors.join("<br />"));
+        editConfirmButton.prop("disabled", !!errors.length);
+
+        return !!errors.length;
+    };
+
+    const editContact = () => {
+        // console.log(loginUsernameInput.val(), loginPasswordInput.val());
+        request("EditContact",
+            {
+                id: activeContactID,
+                user_id: user.id,
+                name_first: editFirstNameInput.val() ?? "",
+                name_last: editLastNameInput.val() ?? "",
+                phone: editPhoneInput.val() ?? "",
+                email: editEmailInput.val() ?? "",
+            },
+            (response) => {
+                console.log(response);
+                searchButton.trigger("click");
+            },
+            (errorMessage) => {
+                console.log(errorMessage);
+            });
+
+        activeContactID = 0;
+        editInputs.val("");
+        editOverlay.addClass("inactive");
+    };
+
+    editInputs.on("focus", (event) => {
+        validateEditContact();
+    });
+    editInputs.on("keyup", (event) => {
+        if (validateEditContact()) {
+            return;
+        }
+
+        if (event.key === "Enter") {
+            editContact();
+        }
+    });
+    editInputs.on("blur", (event) => {
+        editErrorHolder.text("");
+    });
+
+    editConfirmButton.on("click", editContact);
 });
