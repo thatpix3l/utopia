@@ -56,6 +56,10 @@ $(() => {
 
         // console.log(contacts);
 
+        const pageButtons = pagesHolder.children("button");
+        pageButtons.removeClass("selected");
+        pageButtons.eq(page-1).addClass("selected");
+
         contactsTable.children(":not(:first-child)").remove();
 
         const offset = (page - 1) * 10;
