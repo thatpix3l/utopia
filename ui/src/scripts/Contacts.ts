@@ -3,7 +3,7 @@ import { clearCookie, getUserFromCookie } from "./Cookies";
 // import { user } from "./Account";
 import { request } from "./API";
 import { Contact } from "./types/Entity";
-import { validateEmail, validatePartialName, validatePhone } from "./Validation";
+import { autoFormatPhoneInput, validateEmail, validatePartialName, validatePhone } from "./Validation";
 
 
 $(() => {
@@ -221,6 +221,8 @@ $(() => {
         addErrorHolder.text("");
     });
 
+    addPhoneInput.on("keydown", autoFormatPhoneInput);
+
     addConfirmButton.on("click", addContact);
 
 
@@ -283,6 +285,8 @@ $(() => {
     editInputs.on("blur", (event) => {
         editErrorHolder.text("");
     });
+
+    editPhoneInput.on("keydown", autoFormatPhoneInput);
 
     editConfirmButton.on("click", editContact);
 });
