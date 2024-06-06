@@ -144,7 +144,7 @@ $(() => {
 
                 signupErrorHolder.text("");
 
-                // TODO: make this notify user of successful signup
+                loginTabButton.trigger("click");
             },
             (errorMessage) => {
                 console.log(errorMessage);
